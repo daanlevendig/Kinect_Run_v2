@@ -46,7 +46,8 @@ public class Movement : MonoBehaviour
 		moveSideways = 7.5f;
 
 		moveForward = 0.0f;
-		moveSpeed = 0.5f;
+		moveSpeed = 0.25f;
+		//moveSpeed = 0.5f;
 
 		playerHeight = 0.5f;
 		bottomDif = 0.0f;
@@ -118,6 +119,8 @@ public class Movement : MonoBehaviour
 			reachedJumpTop = true;
 		}
 
+		// make sure player doesn't fall through the ground
+		// and resets jump booleans
 		if (playerHeight < floorHeight)
 		{
 			playerHeight = floorHeight;
@@ -126,6 +129,7 @@ public class Movement : MonoBehaviour
 		}
 	}
 
+	// function for movement in all axis' actually
 	void HorizontalMovement()
 	{
 		if (xBottom <= rightBoundry && xBottom >= leftBoundry)
@@ -143,11 +147,13 @@ public class Movement : MonoBehaviour
 		}
 	}
 
+	// constant movement in the z-axis
 	void MoveForward()
 	{
 		moveForward += moveSpeed;
 	}
 
+	// makes player go up and down
 	void Jump()
 	{
 		if (!reachedJumpTop)

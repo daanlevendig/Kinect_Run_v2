@@ -33,12 +33,12 @@ public class DetectCollision : MonoBehaviour
 //		Debug.Log ("right " + rightObstacle);
 	}
 
-//  foreach loop style
+	// front obstacle collision detection
 	void CheckInFront()
 	{
-		// obstacle collision detection
 		foreach (GameObject obstacle in obstacles)
 		{
+			// if there's no more room between player and obstacle, stop moving forward
 			if ((Mathf.Abs (obstacle.transform.position.z - movement.moveForward) <= 1.2f) 
 			&& (movement.playerHeight < (obstacle.transform.position.y + 1.5f)) 
 			&& (Mathf.Abs (obstacle.transform.position.x - transform.position.x) < 5.5f))
@@ -47,21 +47,27 @@ public class DetectCollision : MonoBehaviour
 				break;
 			}
 			else 
-				movement.moveSpeed = 0.2f;
+			{
+				// reset moveSpeed if there's room to move again
+				movement.moveSpeed = 0.25f;
+				//movement.moveSpeed = 0.5f;
+			}
 		}
 	}
 
-
+	// below obstacle collision detection
 	void CheckBelow()
 	{
 		foreach (GameObject obstacle in obstacles)
 		{
+			// if not even near an obstacle: do nothing or reset fallSpeed
 			if (Mathf.Abs (obstacle.transform.position.z - movement.moveForward) >= 1.2f)
 			{
 				movement.fallSpeed = 0.15f;
 			}
 			else 
 			{
+				// if on top of an obstacle stop falling
 				if ((Mathf.Abs (obstacle.transform.position.y - movement.playerHeight) <= 1.6f) 
 				&& (Mathf.Abs (obstacle.transform.position.z - movement.moveForward) < 1.2f) 
 				&& (Mathf.Abs (obstacle.transform.position.x - transform.position.x) < 5.5f))
@@ -69,12 +75,14 @@ public class DetectCollision : MonoBehaviour
 					//Debug.Log("yes");
 					movement.fallSpeed = 0.0f;
 					break;
-				}
+				} 
+				// if above an obstacle keep falling
 				else if ((Mathf.Abs (obstacle.transform.position.y - movement.playerHeight) > 1.6f)
 				&& (Mathf.Abs (obstacle.transform.position.z - movement.moveForward) < 1.2f))
 				{
 					movement.fallSpeed = 0.15f;
 				}
+				// if has been on an obstacle start falling again
 				else if ((Mathf.Abs (obstacle.transform.position.y - movement.playerHeight) > 1.6f)
 				&& (Mathf.Abs (obstacle.transform.position.z - movement.moveForward) >= 1.2f))
 				{
@@ -85,6 +93,7 @@ public class DetectCollision : MonoBehaviour
 		}
 	}
 
+	// left side obstacle collision detection
 	void CheckLeftSide()
 	{		foreach (GameObject obstacle in obstacles)
 		{
@@ -104,6 +113,7 @@ public class DetectCollision : MonoBehaviour
 		}
 	}
 
+	// right side obstacle collision detection
 	void CheckRightSide()
 	{
 		foreach (GameObject obstacle in obstacles)

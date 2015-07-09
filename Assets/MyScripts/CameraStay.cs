@@ -19,11 +19,12 @@ public class CameraStay : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		
-		targetPos = new Vector3(0.0f, 6.0f, player.transform.position.z - 8.5f);
+		// player position
+		targetPos = new Vector3(0.0f, 8.0f, player.transform.position.z - 8.5f);
 		
 		float newPosition = Mathf.SmoothDamp(transform.position.z, targetPos.z, ref zVelocity, smoothTime);
-		
-		transform.position = new Vector3(0f, 8.0f, newPosition);
+
+		// position of the camera relative to the player
+		transform.position = new Vector3(0.0f, 8.0f, newPosition);
 	}
 }
