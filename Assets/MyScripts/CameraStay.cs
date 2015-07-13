@@ -4,11 +4,14 @@ using System.Collections;
 
 public class CameraStay : MonoBehaviour
 {
-	public GameObject player;
-	public Vector3 targetPos;
+	private Movement movement;
+
+	private GameObject player;
+
+	private Vector3 targetPos;
 	
-	public float smoothTime = 0.1f;
-	private float zVelocity = 10.0F;
+	private float smoothTime = 0.1f;
+	private float zVelocity = 10.0f;
 	
 	// Use this for initialization
 	void Start () 

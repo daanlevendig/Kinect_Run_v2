@@ -53,7 +53,7 @@ public class KinectManager : MonoBehaviour
 	public float maxUserDistance = 0f;
 	
 	// Maximum number of users allowed to be tracked
-	public int maxTrackedUsers = 6;
+	public int maxTrackedUsers = 1;
 	
 	// Public Bool to determine whether to detect only the closest user or not
 	public bool detectClosestUser = true;
