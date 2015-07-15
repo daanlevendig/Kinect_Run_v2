@@ -10,8 +10,8 @@ public class CameraStay : MonoBehaviour
 
 	private Vector3 targetPos;
 	
-	private float smoothTime = 0.1f;
-	private float zVelocity = 10.0f;
+	private float smoothTime = 0.5f;
+	private float zVelocity = 15.0f;
 	
 	// Use this for initialization
 	void Start () 
