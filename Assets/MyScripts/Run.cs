@@ -33,14 +33,14 @@ public class Run : MonoBehaviour
 
 		if ((leftLegAngle < 120f) || (rightLegAngle < 120f))
 		{
-			Debug.Log ("Yes");
+//			Debug.Log ("Yes");
 			isMoving = (int)Moving.Running;
 
 			timestampLastMoved = getTimestamp();
 		}
 		else if ((leftLegAngle >= 120f) && (rightLegAngle >= 120f) && (getTimestamp() - timestampLastMoved > 1))
 		{
-			Debug.Log("No");
+//			Debug.Log("No");
 			//StartCoroutine(WaitForNextKnee());
 			isMoving = (int)Moving.Stopped;
 		}
@@ -48,11 +48,11 @@ public class Run : MonoBehaviour
 		switch(isMoving)
 		{
 		case 0:
-			Debug.Log ("case 0");
+//			Debug.Log ("case 0");
 			runSpeed = 0.0f;
 			break;
 		case 1:
-			Debug.Log ("case 1");
+//			Debug.Log ("case 1");
 			runSpeed = 0.15f;
 			break;
 		default:

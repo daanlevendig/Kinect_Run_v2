@@ -116,8 +116,8 @@ public class Movement : MonoBehaviour
 //		Debug.Log ("top reached: " + reachedJumpTop);
 //		Debug.Log (string.Format ("height: {0}", playerHeight));
 //
-		feedback.text = string.Format(" movespeed: {0} \n knee in air?: {1} \n left angle: {2} \n right angle: {3} \n player height {4} \n is moving? {5}",
-		                                moveSpeed,        combinedSpeed,           run.leftLegAngle,      run.rightLegAngle,  playerHeight, run.isMoving);
+		feedback.text = string.Format(" movespeed: {0} \n knee in air?: {1} \n left angle: {2} \n right angle: {3} \n player height {4} \n is moving? {5} \n points: {6}",
+		                                moveSpeed,        combinedSpeed,           run.leftLegAngle,      run.rightLegAngle,  playerHeight, run.isMoving, detectCollision.points);
 
 		xBottom = bottomSpine.x;
 

@@ -9,6 +9,8 @@ public class DetectCollision : MonoBehaviour
 	public Movement movement;
 	public Run run;
 
+	public int points;
+
 	public bool isBelowObstacle;
 	public bool isColliding;
 
@@ -19,6 +21,7 @@ public class DetectCollision : MonoBehaviour
 
 		isBelowObstacle = false;
 		isColliding = false;
+		points = 100;
 	}
 	
 	// Update is called once per frame
@@ -31,6 +34,12 @@ public class DetectCollision : MonoBehaviour
 		CheckLeftSide ();
 		CheckRightSide ();
 
+		if (isColliding)
+		{
+			points -= 1;
+			Debug.Log ("Colliding");
+			Debug.Log (string.Format("Points: {0}", points));
+		}
 //		Debug.Log (string.Format("floorheight{0}", movement.floorHeight);
 //		Debug.Log ("left " + leftObstacle);
 //		Debug.Log ("right " + rightObstacle);
