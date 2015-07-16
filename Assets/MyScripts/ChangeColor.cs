@@ -11,7 +11,7 @@ public class ChangeColor : MonoBehaviour
 	void Start () 
 	{
 		colorRenderer = gameObject.GetComponent<MeshRenderer>();
-		lerpedColor = Color.magenta;
+		lerpedColor = Color.white;
 		newMaterial.color = lerpedColor;
 		colorRenderer.material = newMaterial;
 	}
@@ -21,9 +21,7 @@ public class ChangeColor : MonoBehaviour
 	{
 		newMaterial.color = lerpedColor;
 
-		if (newMaterial.color == Color.red)
-			lerpedColor = Color.Lerp(Color.red, Color.blue, Time.deltaTime);
-		else if (newMaterial.color == Color.blue)
-			lerpedColor = Color.Lerp(Color.blue, Color.red, Time.deltaTime);
+		lerpedColor = Color.Lerp(Color.red, Color.blue, Time.deltaTime*2f);
+//			lerpedColor = Color.Lerp(Color.blue, Color.red, Time.deltaTime);
 	}
 }

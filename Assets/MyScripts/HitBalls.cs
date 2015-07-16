@@ -37,7 +37,7 @@ public class HitBalls : MonoBehaviour
 	{
 		if (ballPunch)
 		{
-			ballSpeed = 0.1f;
+			ballSpeed = 0.05f;
 			startMoving = 1.0f;
 		}
 
@@ -45,8 +45,8 @@ public class HitBalls : MonoBehaviour
 		upMove += ballSpeed;
 		forwardMove += ballSpeed;
 
-		MoveBall ();
-		Destroy ();
+		MoveBall();
+		Destroy();
 	}
 
 	void MoveBall()
@@ -62,7 +62,7 @@ public class HitBalls : MonoBehaviour
 			gameObject.SetActive(false);
 		else if (transform.position.y > (initY + 5f) || transform.position.y < (initY - 1f))
 			gameObject.SetActive(false);
-		else if (transform.position.z > (initZ + 10f) || transform.position.z < (initZ - 1f))
+		else if (transform.position.z > (initZ + 15f) || transform.position.z < (initZ - 1f))
 		    gameObject.SetActive(false);
 	}
 }

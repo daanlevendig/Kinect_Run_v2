@@ -7,6 +7,7 @@ public class DetectCollision : MonoBehaviour
 	public GameObject[] obstacles;
 
 	public Movement movement;
+	public Run run;
 
 	public bool isBelowObstacle;
 	public bool isColliding;
@@ -15,14 +16,14 @@ public class DetectCollision : MonoBehaviour
 	void Start () 
 	{
 		obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
+
+		isBelowObstacle = false;
+		isColliding = false;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		isBelowObstacle = false;
-		isColliding = false;
-
 		// Functions 
 		CheckInFront();
 		CheckBelow();
@@ -55,7 +56,7 @@ public class DetectCollision : MonoBehaviour
 			else 
 			{
 				// reset moveSpeed if there's room to move again
-				movement.moveSpeed = movement.adjustedMoveSpeed;
+				movement.moveSpeed = 0.25f;
 				isColliding = false;
 //				movement.moveSpeed = 0.5f;
 			}
@@ -70,7 +71,7 @@ public class DetectCollision : MonoBehaviour
 			// if not even near an obstacle: do nothing or reset fallSpeed
 			if (Mathf.Abs (obstacle.transform.position.z - movement.moveForward) >= 1.25f)
 			{
-				movement.fallSpeed = 0.15f;
+				movement.fallSpeed = 0.10f;
 				movement.jumpSpeed = 0.25f;
 				isBelowObstacle = false;
 				isColliding = false;
@@ -78,7 +79,7 @@ public class DetectCollision : MonoBehaviour
 			else 
 			{
 				// if on top of an obstacle stop falling
-				if (((obstacle.transform.position.y - movement.playerHeight) <= 1.6f) 
+				if ((Mathf.Abs (obstacle.transform.position.y - movement.playerHeight) <= 1.6f) 
 				&& (Mathf.Abs (obstacle.transform.position.z - movement.moveForward) < 1.0f) 
 				&& (Mathf.Abs (obstacle.transform.position.x - transform.position.x) < 5.5f))
 				{
@@ -90,7 +91,7 @@ public class DetectCollision : MonoBehaviour
 				else if (((obstacle.transform.position.y - movement.playerHeight) > 1.6f)
 				&& (Mathf.Abs (obstacle.transform.position.z - movement.moveForward) < 1.0f))
 				{
-					movement.fallSpeed = 0.15f;
+					movement.fallSpeed = 0.10f;
 					isColliding = false;
 				}
 			}

@@ -25,6 +25,7 @@ public class Movement : MonoBehaviour
 	public KinectManager manager;
 
 	public DetectCollision detectCollision;
+	public Run run;
 
 	public GameObject[] balls;
 
@@ -39,9 +40,7 @@ public class Movement : MonoBehaviour
 	// Forward
 	public float moveForward;
 	public float moveSpeed;
-	public float adjustedMoveSpeed;
-
-	public bool kneeInAir;
+	public float combinedSpeed;
 
 	// Up & Down
 	public float playerHeight;
@@ -77,9 +76,10 @@ public class Movement : MonoBehaviour
 		moveSideways = 7.5f;
 
 		moveForward = 0.0f;
-		moveSpeed = 0.0f;
+		moveSpeed = 0.25f;
 //		moveSpeed = 0.5f;
-		adjustedMoveSpeed = 0.0f;
+		combinedSpeed = 0.0f;
+		hipUp = new Vector3(0.0f, 1.0f, 0.0f);
 
 		playerHeight = 0.5f;
 		bottomDif = 0.0f;
@@ -93,8 +93,6 @@ public class Movement : MonoBehaviour
 		isCrouching = false;
 		isJumping = false;
 		reachedJumpTop = false;
-
-		kneeInAir = false;
 	}
 	
 	// Update is called once per frame
@@ -118,8 +116,8 @@ public class Movement : MonoBehaviour
 //		Debug.Log ("top reached: " + reachedJumpTop);
 //		Debug.Log (string.Format ("height: {0}", playerHeight));
 //
-		feedback.text = string.Format(" movespeed: {0} \n knee in air?: {1} \n left angle: {2} \n right angle: {3}",
-		                                moveSpeed,        kneeInAir,           leftLegAngle,      rightLegAngle);
+		feedback.text = string.Format(" movespeed: {0} \n knee in air?: {1} \n left angle: {2} \n right angle: {3} \n player height {4} \n is moving? {5}",
+		                                moveSpeed,        combinedSpeed,           run.leftLegAngle,      run.rightLegAngle,  playerHeight, run.isMoving);
 
 		xBottom = bottomSpine.x;
 
@@ -137,7 +135,6 @@ public class Movement : MonoBehaviour
 
 		if (isJumping && !isCrouching)
 		{
-			adjustedMoveSpeed = 0.25f;
 			Jump();
 		}
 
@@ -148,7 +145,6 @@ public class Movement : MonoBehaviour
 
 		// Horizontal movement
 		HorizontalMovement();
-		Run();
 
 		if (!isJumping)
 			Crouch ();
@@ -156,56 +152,21 @@ public class Movement : MonoBehaviour
 		// Forward movement
 		MoveForward();
 
+		LegAngles();
+
 		lastBottom = bottomSpine.y;
 		lastLeftHand = leftHand.z;
 		lastRightHand = rightHand.z;
 	}
-	
-	void Run()
+
+	void LegAngles()
 	{
-		// - 1 knie omhoog: kom in beweging
-		// - na ~1 seconde geen knie omhoog: stop beweging
-		// - hogere knieen: meer snelheid
-		// - hogere frequentie: meer snelheid
-		
-		hipUp = new Vector3(0.0f, 1.0f, 0.0f);
 		leftLeg = leftKnee - leftHip;
 		rightLeg = rightKnee - leftHip;
 		leftLegAngle = Vector3.Angle(hipUp, leftLeg);
 		rightLegAngle = Vector3.Angle(hipUp, rightLeg);
-
-		if (leftLegAngle < 120f || rightLegAngle < 120f)
-		{
-			kneeInAir = true;
-		}
-
-		if (kneeInAir)
-		{
-			adjustedMoveSpeed = 0.25f;
-			StartCoroutine(WaitforNextKnee());
-		}
-		else if (!kneeInAir)
-			StartCoroutine(WaitStopMovement());
-
-		if (detectCollision.isColliding)
-			adjustedMoveSpeed = 0.0f;
-
-		moveSpeed = adjustedMoveSpeed;
-//		Debug.Log (string.Format ("L: {0}, R: {1}", leftLegAngle, rightLegAngle));
 	}
-
-    IEnumerator WaitforNextKnee()
-	{
-		yield return new WaitForSeconds(1);
-		kneeInAir = false;
-	}
-
-	IEnumerator WaitStopMovement()
-	{
-		yield return new WaitForSeconds(1);
-		adjustedMoveSpeed = 0.0f;
-	}
-
+	
 	void VerticalMovement()
 	{
 		// if player is going up fast: jump
@@ -260,7 +221,8 @@ public class Movement : MonoBehaviour
 	// constant movement in the z-axis
 	void MoveForward()
 	{
-		moveForward += moveSpeed;
+		combinedSpeed = moveSpeed + run.runSpeed;
+		moveForward += combinedSpeed;
 	}
 
 	// makes player go up and down
@@ -296,11 +258,10 @@ public class Movement : MonoBehaviour
 			if ((Mathf.Abs(ball.transform.position.z - moveForward) <= 1.0f) && !hit.ballPunch)
 			{
 				moveSpeed = 0.0f;
-				adjustedMoveSpeed = 0.0f;
 
 				if (((leftHand.z < (leftShoulder.z - 0.3f)) && (leftHandDif < -0.1f)) || ((rightHand.z < (rightShoulder.z - 0.3f)) && (rightHandDif < -0.1f)))
 				{
-					moveSpeed = adjustedMoveSpeed;
+					moveSpeed = 0.25f;
 //					moveSpeed = 0.5f;
 					hit.ballPunch = true;
 					continue;
