@@ -21,7 +21,14 @@ public class ChangeColor : MonoBehaviour
 	{
 		newMaterial.color = lerpedColor;
 
-		lerpedColor = Color.Lerp(Color.red, Color.blue, Time.deltaTime*2f);
-//			lerpedColor = Color.Lerp(Color.blue, Color.red, Time.deltaTime);
+		StartCoroutine(ShiftColor());
+	}
+
+	IEnumerator ShiftColor()
+	{
+		yield return new WaitForSeconds(2);
+		lerpedColor = Color.Lerp(Color.red, Color.blue, Time.deltaTime/10f);
+		yield return new WaitForSeconds(2);
+		lerpedColor = Color.Lerp(Color.blue, Color.red, Time.deltaTime/10f);
 	}
 }

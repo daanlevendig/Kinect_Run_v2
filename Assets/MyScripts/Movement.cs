@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
 
 	// Joints
 	public Vector3 bottomSpine;
+	public Vector3 bottomHead;
 	public Vector3 leftHand;
 	public Vector3 rightHand;
 	public Vector3 leftShoulder;
@@ -24,8 +25,9 @@ public class Movement : MonoBehaviour
 		
 	public KinectManager manager;
 
-	public DetectCollision detectCollision;
 	public Run run;
+	public TakeDamage takeDamage;
+	public HeadScript headScript;
 
 	public GameObject[] balls;
 
@@ -70,15 +72,21 @@ public class Movement : MonoBehaviour
 
 		balls = GameObject.FindGameObjectsWithTag("Ball");
 
-		rightBoundry = 0.3f;
-		leftBoundry = -0.3f;
+		takeDamage = gameObject.GetComponent<TakeDamage>();
+		headScript = head.GetComponent<HeadScript>();
+		run = GetComponent<Run>();
+
+		rightBoundry = 0.6f;
+		leftBoundry = -0.6f;
 //		moveSideways = 5.0f;
-		moveSideways = 7.5f;
+		moveSideways = 5.0f;
 
 		moveForward = 0.0f;
-		moveSpeed = 0.25f;
+		moveSpeed = 0.35f;
 //		moveSpeed = 0.5f;
 		combinedSpeed = 0.0f;
+
+		// vertical normal vector for hip angle
 		hipUp = new Vector3(0.0f, 1.0f, 0.0f);
 
 		playerHeight = 0.5f;
@@ -102,7 +110,9 @@ public class Movement : MonoBehaviour
 		manager = KinectManager.Instance;
 		long userID = manager ? manager.GetUserIdByIndex (0) : 0;
 		if (userID == 0) return;
+
 		bottomSpine = manager.GetJointPosition (userID, 0);
+		bottomHead = manager.GetJointPosition (userID, 2);
 		leftHand = manager.GetJointPosition (userID, 6);
 		rightHand = manager.GetJointPosition (userID, 10);
 		leftShoulder = manager.GetJointPosition (userID, 4);
@@ -116,10 +126,10 @@ public class Movement : MonoBehaviour
 //		Debug.Log ("top reached: " + reachedJumpTop);
 //		Debug.Log (string.Format ("height: {0}", playerHeight));
 //
-		feedback.text = string.Format(" movespeed: {0} \n knee in air?: {1} \n left angle: {2} \n right angle: {3} \n player height {4} \n is moving? {5} \n points: {6}",
-		                                moveSpeed,        combinedSpeed,           run.leftLegAngle,      run.rightLegAngle,  playerHeight, run.isMoving, detectCollision.points);
+		feedback.text = string.Format(" movespeed: {0} \n all speed combined: {1} \n left angle: {2} \n right angle: {3} \n runspeed: {4} \n points: {5}",
+		                                moveSpeed,        combinedSpeed,             leftLegAngle,      rightLegAngle,      run.runSpeed,    takeDamage.points);
 
-		xBottom = bottomSpine.x;
+		xBottom = bottomHead.x;
 
 		// Distance temps for delta calculation
 		if (transform.position.z > 0.5f)
@@ -152,6 +162,7 @@ public class Movement : MonoBehaviour
 		// Forward movement
 		MoveForward();
 
+		// Calculate leg angles
 		LegAngles();
 
 		lastBottom = bottomSpine.y;
@@ -173,15 +184,6 @@ public class Movement : MonoBehaviour
 		if (bottomDif >= 0.1f)
 		{
 			isJumping = true;
-		}
-
-		if ((bottomSpine.y < (yBottom - 0.2f)))
-		{
-			isCrouching = true;
-		}
-		else 
-		{
-			isCrouching = false;
 		}
 
 		// check if the player can go down again
@@ -221,7 +223,16 @@ public class Movement : MonoBehaviour
 	// constant movement in the z-axis
 	void MoveForward()
 	{
-		combinedSpeed = moveSpeed + run.runSpeed;
+		if (!takeDamage.finished)
+			combinedSpeed = moveSpeed + run.runSpeed;
+		else
+		{
+			if (combinedSpeed > 0.0f)
+				combinedSpeed -= 0.01f;
+			else
+				combinedSpeed = 0.0f;
+		}
+
 		moveForward += combinedSpeed;
 	}
 
@@ -242,7 +253,7 @@ public class Movement : MonoBehaviour
 			isCrouching = true;
 			head.SetActive(false);
 		}
-		else if(!detectCollision.isBelowObstacle)
+		else if ((bottomSpine.y >= (yBottom - 0.25f)))
 		{
 			isCrouching = false;
 			head.SetActive(true);
@@ -255,19 +266,23 @@ public class Movement : MonoBehaviour
 		{
 			HitBalls hit = ball.GetComponent<HitBalls>();
 
-			if ((Mathf.Abs(ball.transform.position.z - moveForward) <= 1.0f) && !hit.ballPunch)
+			if ((Mathf.Abs(ball.transform.position.z - moveForward) <= 3.5f) && !hit.ballPunch)
 			{
-				moveSpeed = 0.0f;
-
-				if (((leftHand.z < (leftShoulder.z - 0.3f)) && (leftHandDif < -0.1f)) || ((rightHand.z < (rightShoulder.z - 0.3f)) && (rightHandDif < -0.1f)))
+				if (((leftHand.z < (leftShoulder.z - 0.3f)) && (leftHandDif < -0.1f)) 
+				|| ((rightHand.z < (rightShoulder.z - 0.3f)) && (rightHandDif < -0.1f)))
 				{
-					moveSpeed = 0.25f;
-//					moveSpeed = 0.5f;
 					hit.ballPunch = true;
-					continue;
+				}
+
+				if ((Mathf.Abs(ball.transform.position.z - moveForward) <= 1.0f) && !hit.ballPunch)
+				{
+					takeDamage.points -= 3;
+					hit.VisualHit();
+					takeDamage.VisualHit();
+					if (!isCrouching)
+						headScript.VisualHit();
 				}
 			}
-
 		}
 	}
 }

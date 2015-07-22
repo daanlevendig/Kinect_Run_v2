@@ -10,12 +10,15 @@ public class Coin : MonoBehaviour
 	public float spinSpeed;
 
 	public Movement movement;
-	public DetectCollision detectCollision;
+	public TakeDamage takeDamage;
 
 	// Use this for initialization
 	void Start () 
 	{
 		player = GameObject.FindGameObjectWithTag("Player");
+
+		movement = player.GetComponent<Movement>();
+		takeDamage = player.GetComponent<TakeDamage>();
 
 		randomDirection = new Vector3(0,0, Random.Range(-180f, 180f));
 		transform.Rotate(randomDirection);
@@ -41,7 +44,7 @@ public class Coin : MonoBehaviour
 	    && (Mathf.Abs(player.transform.position.y - transform.position.y) < 0.9f)
 	    && (Mathf.Abs(player.transform.position.z - transform.position.z) < 0.9f))
 		{
-			detectCollision.points += 1;
+			takeDamage.points += 75;
 			gameObject.SetActive(false);
 		}
 	}
