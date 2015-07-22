@@ -23,16 +23,6 @@ public class Finish : MonoBehaviour
 		if (player.transform.position.z > transform.position.z)
 		{
 			takeDamage.finished = true;
-
-//			StartCoroutine(HighScores());
 		}
 	}
-	
-//	IEnumerator HighScores()
-//	{
-//		yield return new WaitForSeconds(3);
-//		Application.LoadLevel (3);
-//		Destroy (GameObject.FindGameObjectWithTag ("MainCamera"));
-//		Destroy (GameObject.FindGameObjectWithTag ("DeathPlane"));
-//	}
 }

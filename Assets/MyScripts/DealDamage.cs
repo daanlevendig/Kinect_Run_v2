@@ -42,7 +42,13 @@ public class DealDamage : MonoBehaviour
 				    && (Mathf.Abs (transform.position.x - movement.transform.position.x) < 5.5f))
 				{
 					takeDamage.points -= 10;
-					Destroy(this);
+					if (!movement.isCrouching)
+						Destroy (this);
+					else
+					{
+						movement.isCrouching = false;
+						Destroy (this);
+					}
 				}
 			}
 		}

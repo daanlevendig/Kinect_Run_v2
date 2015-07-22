@@ -62,6 +62,7 @@ public class Movement : MonoBehaviour
 	public bool reachedJumpTop;
 	public bool isJumping;
 	public bool isCrouching;
+	public bool begin;
 
 	// Use this for initialization
 	void Start () 
@@ -82,7 +83,7 @@ public class Movement : MonoBehaviour
 		moveSideways = 5.0f;
 
 		moveForward = 0.0f;
-		moveSpeed = 0.35f;
+		moveSpeed = 0.3f;
 //		moveSpeed = 0.5f;
 		combinedSpeed = 0.0f;
 
@@ -101,6 +102,8 @@ public class Movement : MonoBehaviour
 		isCrouching = false;
 		isJumping = false;
 		reachedJumpTop = false;
+
+		begin = false;
 	}
 	
 	// Update is called once per frame
@@ -109,7 +112,12 @@ public class Movement : MonoBehaviour
 		// setup kinect
 		manager = KinectManager.Instance;
 		long userID = manager ? manager.GetUserIdByIndex (0) : 0;
-		if (userID == 0) return;
+		if (userID == 0)
+		{
+			begin = false;
+			return;
+		}
+		begin = true;
 
 		bottomSpine = manager.GetJointPosition (userID, 0);
 		bottomHead = manager.GetJointPosition (userID, 2);
@@ -122,12 +130,10 @@ public class Movement : MonoBehaviour
 		rightHip = manager.GetJointPosition (userID, 16);
 		rightKnee = manager.GetJointPosition (userID, 17);
 
-//		Debug.Log ("jumping: " + isJumping);
-//		Debug.Log ("top reached: " + reachedJumpTop);
-//		Debug.Log (string.Format ("height: {0}", playerHeight));
-//
-		feedback.text = string.Format(" movespeed: {0} \n all speed combined: {1} \n left angle: {2} \n right angle: {3} \n runspeed: {4} \n points: {5}",
-		                                moveSpeed,        combinedSpeed,             leftLegAngle,      rightLegAngle,      run.runSpeed,    takeDamage.points);
+		feedback.text = string.Format(" movespeed: {0} \n all speed combined: {1} \n left dif: {2} \n right dif: {3} \n runspeed: {4} \n points: {5}",
+		                              moveSpeed,        combinedSpeed,             run.leftKneeDif, run.rightKneeDif, run.runSpeed,    takeDamage.points);
+
+		Debug.Log (string.Format ("L: {0}, R: {1}", run.leftKneeDif, run.rightKneeDif));
 
 		xBottom = bottomHead.x;
 

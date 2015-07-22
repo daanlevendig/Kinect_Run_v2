@@ -6,6 +6,8 @@ public class TakeDamage : MonoBehaviour
 {
 	public MeshRenderer rend;
 
+	public Movement movement;
+
 	public Text score;
 	public Text timer;
 
@@ -23,6 +25,8 @@ public class TakeDamage : MonoBehaviour
 
 		rend = gameObject.GetComponent<MeshRenderer>();
 
+		movement = GetComponent<Movement>();
+
 		score = GameObject.Find ("Score").GetComponent<Text>();
 		timer = GameObject.Find ("Timer").GetComponent<Text>();
 		
@@ -37,7 +41,8 @@ public class TakeDamage : MonoBehaviour
 
 		score.text = string.Format ("{0}",points);
 
-		Timer ();
+		if (movement.begin && !finished)
+			Timer ();
 	}
 
 	public void VisualHit()
