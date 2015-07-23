@@ -7,6 +7,7 @@ public class Pole : MonoBehaviour
 	public Movement movement;
 	public TakeDamage takeDamage;
 	public GameObject player;
+	public Bounds bounds;
 	
 	// Use this for initialization
 	void Start () 
@@ -15,6 +16,7 @@ public class Pole : MonoBehaviour
 		player = GameObject.FindGameObjectWithTag("Player");
 		movement = player.GetComponent<Movement>();
 		takeDamage = player.GetComponent<TakeDamage>();
+		bounds = new Bounds(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z)); 
 	}
 	
 	// Update is called once per frame
@@ -28,11 +30,11 @@ public class Pole : MonoBehaviour
 		foreach (GameObject pole in poles)
 		{
 			if ((Mathf.Abs (transform.position.z - movement.moveForward) < 1.0f)
-			    && (movement.playerHeight < (transform.position.y + 1.0f))
+			    && (movement.playerHeight < (transform.position.y + 1.5f))
 			    && (movement.playerHeight >= (transform.position.y - 1.5f))
-			    && (Mathf.Abs (transform.position.x - movement.transform.position.x) < 1.0f))
+			    && (Mathf.Abs (transform.position.x - movement.transform.position.x) < (bounds.size.x/2 + 0.5f)))
 			{
-				takeDamage.points -= 5;
+				takeDamage.points -= (5.0000f/((float)(poles.Length)));
 				Destroy (this);
 			}
 		}

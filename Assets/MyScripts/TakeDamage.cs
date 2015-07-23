@@ -13,7 +13,7 @@ public class TakeDamage : MonoBehaviour
 
 	public float realSeconds;
 	public int seconds, minutes, secondsHS;
-	public int points;
+	public float points;
 
 	public string clock, highScore;
 	public bool finished;
@@ -21,7 +21,7 @@ public class TakeDamage : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		points = 0;
+		points = 10000.0f;
 
 		rend = gameObject.GetComponent<MeshRenderer>();
 
@@ -36,10 +36,10 @@ public class TakeDamage : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if (points <= 0)
-			points = 0;
+		if (points <= 0.0f)
+			points = 0.0f;
 
-		score.text = string.Format ("{0}",points);
+		score.text = string.Format ("{0}",(int)points);
 
 		if (movement.begin && !finished)
 			Timer ();

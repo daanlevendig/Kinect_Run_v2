@@ -289,7 +289,7 @@ public class Movement : MonoBehaviour
 
 				if ((Mathf.Abs(ball.transform.position.z - moveForward) <= 1.0f) && !hit.ballPunch)
 				{
-					takeDamage.points -= 3;
+					takeDamage.points -= (10.0000f/((float)(balls.Length)));
 					hit.VisualHit();
 					takeDamage.VisualHit();
 					if (!isCrouching)

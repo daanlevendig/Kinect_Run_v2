@@ -11,7 +11,6 @@ public class HeadScript : MonoBehaviour
 	{
 		rend = gameObject.GetComponent<MeshRenderer>();
 		movement = GetComponentInParent<Movement>();
-
 	}
 
 	// Update is called once per frame

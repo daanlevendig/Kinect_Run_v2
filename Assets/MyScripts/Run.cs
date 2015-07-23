@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Run : MonoBehaviour 
 {
-	public enum Moving {Stopped, Jogging, Sprinting};
+	public enum Moving {Stopped, Walking, Jogging, Sprinting};
 	public int isMoving;
 
 	public Movement movement;
@@ -41,7 +41,7 @@ public class Run : MonoBehaviour
 		leftKneeY = movement.leftKnee.y;
 		rightKneeY = movement.rightKnee.y;
 
-		Running();
+		Running1();
 
 		lastLeftKneeY = movement.leftKnee.y;
 		lastRightKneeY = movement.rightKnee.y;
@@ -56,7 +56,7 @@ public class Run : MonoBehaviour
 //		lastRightAngle = movement.rightLegAngle;
 	}
 
-	void Running()
+	void Running1()
 	{
 		leftKneeDif = (Mathf.Abs (leftKneeY - lastLeftKneeY));
 		rightKneeDif = (Mathf.Abs(rightKneeY - lastRightKneeY));
@@ -69,6 +69,11 @@ public class Run : MonoBehaviour
 		else if ((leftKneeDif >= 0.01f) || (rightKneeDif >= 0.01f))
 		{
 			isMoving = (int)Moving.Jogging;
+			timestampLastMoved = getTimestamp();
+		} 
+		else if ((leftKneeDif >= 0.005f) || (rightKneeDif >= 0.005f))
+		{
+			isMoving = (int)Moving.Walking;
 			timestampLastMoved = getTimestamp();
 		} 
 		else if (getTimestamp() - timestampLastMoved > 1)
@@ -95,6 +100,12 @@ public class Run : MonoBehaviour
 				runSpeed += 0.015f;
 			else
 				runSpeed = 0.02f;
+			break;
+		case 3:
+			if (runSpeed < 0.3f)
+				runSpeed += 0.02f;
+			else
+				runSpeed = 0.03f;
 			break;
 		default:
 			Debug.Log ("error: isMoving 0x04011988-D44N");

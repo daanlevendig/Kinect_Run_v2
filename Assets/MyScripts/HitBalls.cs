@@ -48,7 +48,7 @@ public class HitBalls : MonoBehaviour
 		{
 			ballSpeed = 0.05f;
 			startMoving = 1.0f;
-			takeDamage.points += 100;
+			takeDamage.points += 100.0f;
 		}
 
 		sideMove += ballSpeed;
