@@ -11,6 +11,7 @@ public class FlipMesh : MonoBehaviour
 	public TakeDamage takeDamage;
 	public HeadScript headScript;
 	public MeshRenderer[] children;
+	public Bounds bounds;
 	
 	// Use this for initialization
 	void Start () 
@@ -23,6 +24,7 @@ public class FlipMesh : MonoBehaviour
 		headScript = head.GetComponent<HeadScript>();
 		rend = gameObject.GetComponent<MeshRenderer>();
 		children = gameObject.GetComponentsInChildren<MeshRenderer>();
+		bounds = new Bounds(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z)); 
 	}
 	
 	// Update is called once per frame
@@ -48,10 +50,10 @@ public class FlipMesh : MonoBehaviour
 			}
 			else
 			{
-				if ((Mathf.Abs (transform.position.z - movement.moveForward) < 1.25f)
-			    && (movement.playerHeight < (transform.position.y + 1.25f))
+				if ((Mathf.Abs (transform.position.z - movement.moveForward) < 1.0f)
+			    && (movement.playerHeight < (transform.position.y + 1.5f))
 			    && (movement.playerHeight >= (transform.position.y - 1.5f))
-			    && (Mathf.Abs (transform.position.x - movement.transform.position.x) < 5.5f))
+			    && (Mathf.Abs (transform.position.x - movement.transform.position.x) < (bounds.size.x/2 + 0.5f)))
 				{
 					takeDamage.VisualHit();
 					if (!movement.isCrouching)

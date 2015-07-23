@@ -6,6 +6,8 @@ public class Movement : MonoBehaviour
 {
 	public Text feedback;
 
+	public GameObject waitingForPlayer;
+
 	// Joints
 	public Vector3 bottomSpine;
 	public Vector3 bottomHead;
@@ -69,6 +71,8 @@ public class Movement : MonoBehaviour
 	{
 		feedback = GameObject.Find ("Feedback").GetComponent<Text>();
 
+		waitingForPlayer = GameObject.FindGameObjectWithTag("OutOfSight");
+
 		head = GameObject.Find("Player/Head");
 
 		balls = GameObject.FindGameObjectsWithTag("Ball");
@@ -103,6 +107,7 @@ public class Movement : MonoBehaviour
 		isJumping = false;
 		reachedJumpTop = false;
 
+		waitingForPlayer.SetActive(false);
 		begin = false;
 	}
 	
@@ -114,9 +119,11 @@ public class Movement : MonoBehaviour
 		long userID = manager ? manager.GetUserIdByIndex (0) : 0;
 		if (userID == 0)
 		{
+			waitingForPlayer.SetActive(true);
 			begin = false;
 			return;
 		}
+		waitingForPlayer.SetActive(false);
 		begin = true;
 
 		bottomSpine = manager.GetJointPosition (userID, 0);
@@ -133,7 +140,7 @@ public class Movement : MonoBehaviour
 		feedback.text = string.Format(" movespeed: {0} \n all speed combined: {1} \n left dif: {2} \n right dif: {3} \n runspeed: {4} \n points: {5}",
 		                              moveSpeed,        combinedSpeed,             run.leftKneeDif, run.rightKneeDif, run.runSpeed,    takeDamage.points);
 
-		Debug.Log (string.Format ("L: {0}, R: {1}", run.leftKneeDif, run.rightKneeDif));
+//		Debug.Log (string.Format ("L: {0}, R: {1}", run.leftKneeDif, run.rightKneeDif));
 
 		xBottom = bottomHead.x;
 

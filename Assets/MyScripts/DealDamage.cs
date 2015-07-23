@@ -36,8 +36,8 @@ public class DealDamage : MonoBehaviour
 
 			if (!isGate || !movement.isCrouching)
 			{
-				if ((Mathf.Abs (transform.position.z - movement.moveForward) < 1.25f)
-				    && (movement.playerHeight < (transform.position.y + 1.25f))
+				if ((Mathf.Abs (transform.position.z - movement.moveForward) < 1.0f)
+				    && (movement.playerHeight < (transform.position.y + 1.0f))
 				    && (movement.playerHeight >= (transform.position.y - 1.5f))
 				    && (Mathf.Abs (transform.position.x - movement.transform.position.x) < 5.5f))
 				{

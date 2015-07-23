@@ -175,7 +175,8 @@ public class Run : MonoBehaviour
 //		}
 //	}
 
-	double getTimestamp() {
+	double getTimestamp() 
+	{
 		var epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
 		var timestamp = (System.DateTime.UtcNow - epochStart).TotalSeconds;
 
