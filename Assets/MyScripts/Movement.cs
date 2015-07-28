@@ -4,9 +4,9 @@ using System.Collections;
 
 public class Movement : MonoBehaviour 
 {
-	public Text feedback;
+//	public Text feedback;
 
-	public GameObject waitingForPlayer;
+//	public GameObject waitingForPlayer;
 
 	// Joints
 	public Vector3 bottomSpine;
@@ -21,9 +21,11 @@ public class Movement : MonoBehaviour
 	public Vector3 rightKnee;
 	public Vector3 leftLeg;
 	public Vector3 rightLeg;
+	public Vector3 body;
 	public Vector3 hipUp;
 	public float leftLegAngle;
 	public float rightLegAngle;
+	public float bodyAngle;
 		
 	public KinectManager manager;
 
@@ -66,12 +68,14 @@ public class Movement : MonoBehaviour
 	public bool isCrouching;
 	public bool begin;
 
+	public bool debugBool;
+
 	// Use this for initialization
 	void Start () 
 	{
-		feedback = GameObject.Find ("Feedback").GetComponent<Text>();
+//		feedback = GameObject.Find ("Feedback").GetComponent<Text>();
 
-		waitingForPlayer = GameObject.FindGameObjectWithTag("OutOfSight");
+//		waitingForPlayer = GameObject.FindGameObjectWithTag("OutOfSight");
 
 		head = GameObject.Find("Player/Head");
 
@@ -83,12 +87,10 @@ public class Movement : MonoBehaviour
 
 		rightBoundry = 0.6f;
 		leftBoundry = -0.6f;
-//		moveSideways = 5.0f;
 		moveSideways = 5.0f;
 
 		moveForward = 0.0f;
-		moveSpeed = 0.3f;
-//		moveSpeed = 0.5f;
+		moveSpeed = 0.2f;
 		combinedSpeed = 0.0f;
 
 		// vertical normal vector for hip angle
@@ -99,15 +101,18 @@ public class Movement : MonoBehaviour
 		leftHandDif = 0.0f;
 		rightHandDif = 0.0f;
 		maxJumpHeight = 2.0f;
-		jumpSpeed = 0.25f;
-		fallSpeed = 0.15f;
+		jumpSpeed = 0.2f;
+		fallSpeed = 0.1f;
 		floorHeight = 0.5f;
 
 		isCrouching = false;
 		isJumping = false;
 		reachedJumpTop = false;
 
-		waitingForPlayer.SetActive(false);
+		// set to true for feedback
+//		debugBool = true;
+
+//		waitingForPlayer.SetActive(false);
 		begin = false;
 	}
 	
@@ -119,11 +124,11 @@ public class Movement : MonoBehaviour
 		long userID = manager ? manager.GetUserIdByIndex (0) : 0;
 		if (userID == 0)
 		{
-			waitingForPlayer.SetActive(true);
+//			waitingForPlayer.SetActive(true);
 			begin = false;
 			return;
 		}
-		waitingForPlayer.SetActive(false);
+//		waitingForPlayer.SetActive(false);
 		begin = true;
 
 		bottomSpine = manager.GetJointPosition (userID, 0);
@@ -137,10 +142,20 @@ public class Movement : MonoBehaviour
 		rightHip = manager.GetJointPosition (userID, 16);
 		rightKnee = manager.GetJointPosition (userID, 17);
 
-		feedback.text = string.Format(" movespeed: {0} \n all speed combined: {1} \n left dif: {2} \n right dif: {3} \n runspeed: {4} \n points: {5}",
-		                              moveSpeed,        combinedSpeed,             run.leftKneeDif, run.rightKneeDif, run.runSpeed,    takeDamage.points);
-
-//		Debug.Log (string.Format ("L: {0}, R: {1}", run.leftKneeDif, run.rightKneeDif));
+//		if (debugBool)
+//		{
+//			// Feeedback text in-game
+////			feedback.text = string.Format(" movespeed: {0} \n all speed combined: {1} \n left dif: {2} \n right dif: {3} \n runspeed: {4} \n Body angle: {5}",
+////			                              moveSpeed,        combinedSpeed,             run.leftKneeDif,   run.rightKneeDif, run.runSpeed,   bodyAngle);
+//
+//			// Console Debug
+////			Debug.Log (string.Format ("L: {0}, R: {1}", run.leftKneeDif, run.rightKneeDif));
+//
+//			// Skeleton
+//			manager.computeUserMap = true;
+//		}
+//		else
+//			manager.computeUserMap = false;
 
 		xBottom = bottomHead.x;
 
@@ -187,8 +202,10 @@ public class Movement : MonoBehaviour
 	{
 		leftLeg = leftKnee - leftHip;
 		rightLeg = rightKnee - leftHip;
+		body = bottomHead - bottomSpine;
 		leftLegAngle = Vector3.Angle(hipUp, leftLeg);
 		rightLegAngle = Vector3.Angle(hipUp, rightLeg);
+		bodyAngle = Vector3.Angle(hipUp, body);
 	}
 	
 	void VerticalMovement()
@@ -261,12 +278,12 @@ public class Movement : MonoBehaviour
 
 	void Crouch()
 	{
-		if ((bottomSpine.y < (yBottom - 0.25f)))
+		if ((bottomSpine.y < (yBottom - 0.25f)) && (bodyAngle <= 20.0f))
 		{
 			isCrouching = true;
 			head.SetActive(false);
 		}
-		else if ((bottomSpine.y >= (yBottom - 0.25f)))
+		else if ((bottomSpine.y >= (yBottom - 0.25f)) || (bodyAngle > 20.0f))
 		{
 			isCrouching = false;
 			head.SetActive(true);

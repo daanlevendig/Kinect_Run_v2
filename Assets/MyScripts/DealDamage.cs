@@ -18,7 +18,7 @@ public class DealDamage : MonoBehaviour
 		takeDamage = player.GetComponent<TakeDamage>();
 		bounds = new Bounds(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z)); 
 	}
-
+	 	
 	// Update is called once per frame
 	void Update () 
 	{
@@ -38,9 +38,9 @@ public class DealDamage : MonoBehaviour
 
 			if (!isGate || !movement.isCrouching)
 			{
-				if ((Mathf.Abs (transform.position.z - movement.moveForward) < 1.0f)
-				    && (movement.playerHeight < (transform.position.y + 1.5f))
-				    && (movement.playerHeight >= (transform.position.y - 1.5f))
+				if ((Mathf.Abs (transform.position.z - movement.moveForward) < (bounds.size.z/2 + 0.5f))
+				    && (movement.playerHeight < (transform.position.y + (bounds.size.y/2 + 0.5f)))
+				    && (movement.playerHeight >= (transform.position.y - (bounds.size.y/2 + 0.5f)))
 				    && (Mathf.Abs (transform.position.x - movement.transform.position.x) < (bounds.size.x/2f + 0.5f)))
 				{
 					takeDamage.points -= (25.0000f/((float)(obstacles.Length)));

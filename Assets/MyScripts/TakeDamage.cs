@@ -21,7 +21,7 @@ public class TakeDamage : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		points = 10000.0f;
+		points = 0.0f;
 
 		rend = gameObject.GetComponent<MeshRenderer>();
 
@@ -52,7 +52,6 @@ public class TakeDamage : MonoBehaviour
 
 	IEnumerator Flash()
 	{
-		yield return new WaitForSeconds(0.05f);
 		rend.enabled = false;
 		yield return new WaitForSeconds(0.05f);
 		rend.enabled = true;

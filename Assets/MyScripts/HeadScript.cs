@@ -26,7 +26,6 @@ public class HeadScript : MonoBehaviour
 	
 	IEnumerator Flash()
 	{
-		yield return new WaitForSeconds(0.05f);
 		rend.enabled = false;
 		yield return new WaitForSeconds(0.05f);
 		rend.enabled = true;

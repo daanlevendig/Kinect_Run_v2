@@ -76,7 +76,7 @@ public class Run : MonoBehaviour
 			isMoving = (int)Moving.Walking;
 			timestampLastMoved = getTimestamp();
 		} 
-		else if (getTimestamp() - timestampLastMoved > 1)
+		else if (getTimestamp() - timestampLastMoved > 0.75)
 		{
 			isMoving = (int)Moving.Stopped;
 		}
@@ -128,7 +128,7 @@ public class Run : MonoBehaviour
 			isMoving = (int)Moving.Jogging;
 			timestampLastMoved = getTimestamp();
 		} 
-		else if (getTimestamp() - timestampLastMoved > 1)
+		else if (getTimestamp() - timestampLastMoved > 0.75)
 		{
 			isMoving = (int)Moving.Stopped;
 		}

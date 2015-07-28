@@ -29,9 +29,9 @@ public class Pole : MonoBehaviour
 	{		
 		foreach (GameObject pole in poles)
 		{
-			if ((Mathf.Abs (transform.position.z - movement.moveForward) < 1.0f)
-			    && (movement.playerHeight < (transform.position.y + 1.5f))
-			    && (movement.playerHeight >= (transform.position.y - 1.5f))
+			if ((Mathf.Abs (transform.position.z - movement.moveForward) < (bounds.size.z/2 + 0.5f))
+			    && (movement.playerHeight < (transform.position.y + (bounds.size.y/2 + 0.5f)))
+			    && (movement.playerHeight >= (transform.position.y - (bounds.size.y/2 + 0.5f)))
 			    && (Mathf.Abs (transform.position.x - movement.transform.position.x) < (bounds.size.x/2 + 0.5f)))
 			{
 				takeDamage.points -= (5.0000f/((float)(poles.Length)));
