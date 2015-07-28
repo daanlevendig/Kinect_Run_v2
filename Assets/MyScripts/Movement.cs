@@ -211,7 +211,7 @@ public class Movement : MonoBehaviour
 	void VerticalMovement()
 	{
 		// if player is going up fast: jump
-		if (bottomDif >= 0.1f)
+		if (bottomDif >= 0.05f)
 		{
 			isJumping = true;
 		}
@@ -298,8 +298,8 @@ public class Movement : MonoBehaviour
 
 			if ((Mathf.Abs(ball.transform.position.z - moveForward) <= 3.5f) && !hit.ballPunch)
 			{
-				if (((leftHand.z < (leftShoulder.z - 0.3f)) && (leftHandDif < -0.1f)) 
-				|| ((rightHand.z < (rightShoulder.z - 0.3f)) && (rightHandDif < -0.1f)))
+				if (((leftHand.z < (leftShoulder.z - 0.3f)) && (leftHandDif < -0.05f)) 
+				|| ((rightHand.z < (rightShoulder.z - 0.3f)) && (rightHandDif < -0.05f)))
 				{
 					hit.ballPunch = true;
 				}
