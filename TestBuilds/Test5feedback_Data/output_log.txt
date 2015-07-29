@@ -1,0 +1,66 @@
+Initialize engine version: 5.1.1f1 (2046fc06d4d8)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: Intel(R) HD Graphics 4400 (ID=0x41e)
+    Vendor:   Intel
+    VRAM:     896 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5feedback_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5feedback_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5feedback_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5feedback_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5feedback_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5feedback_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5feedback_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5feedback_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5feedback_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5feedback_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5feedback_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5feedback_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5feedback_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5feedback_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+Platform assembly: C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5feedback_Data\Managed\OpenCvSharp.dll (this message is harmless)
+Loading C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5feedback_Data\Managed\OpenCvSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5feedback_Data\Managed\ICSharpCode.SharpZipLib.dll (this message is harmless)
+Loading C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5feedback_Data\Managed\ICSharpCode.SharpZipLib.dll into Unity Child Domain
+- Completed reload, in  0.054 seconds
+<RI> Initializing input.
+XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
+<RI> Input initialized.
+desktop: 1920x1080 60Hz; virtual: 3840x1080 at -1920,0
+<RI> Initialized touch support.
+Platform assembly: C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5feedback_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5feedback_Data\Managed\System.dll (this message is harmless)
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test5feedback_Data/Mono/Kinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test5feedback_Data/Mono/.\Kinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test5feedback_Data/Mono/Kinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test5feedback_Data/Mono/Kinect10
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test5feedback_Data/Mono/.\Kinect10
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test5feedback_Data/Mono/Kinect10
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test5feedback_Data/Mono/libKinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test5feedback_Data/Mono/.\libKinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test5feedback_Data/Mono/libKinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test5feedback_Data/Mono/Kinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test5feedback_Data/Mono/.\Kinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test5feedback_Data/Mono/Kinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test5feedback_Data/Mono/Kinect10
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test5feedback_Data/Mono/.\Kinect10
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test5feedback_Data/Mono/Kinect10
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test5feedback_Data/Mono/libKinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test5feedback_Data/Mono/.\libKinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test5feedback_Data/Mono/libKinect10.dll
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 11dc -> priority: 1 
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.258367 ms
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 507.
+Total: 0.446811 ms (FindLiveObjects: 0.033527 ms CreateObjectMapping: 0.021211 ms MarkObjects: 0.367096 ms  DeleteObjects: 0.010605 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.107491 ms
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 1909.
+Total: 0.768405 ms (FindLiveObjects: 0.105373 ms CreateObjectMapping: 0.048239 ms MarkObjects: 0.599739 ms  DeleteObjects: 0.013684 ms)
+

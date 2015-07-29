@@ -57,8 +57,8 @@ public class Movement : MonoBehaviour
 		moveSideways = 5.0f;
 		
 		moveForward = 0.0f;
-		moveSpeed = 0.25f;
-//		moveSpeed = 7.0f;
+//		moveSpeed = 0.25f;
+		moveSpeed = 7.0f;
 		combinedSpeed = 0.0f;
 		
 		// vertical normal vector for hip angle
@@ -146,8 +146,8 @@ public class Movement : MonoBehaviour
 	{
 		if (!hud.finished)
 		{
-			combinedSpeed = (moveSpeed + run.runSpeed);
-//			combinedSpeed = ((moveSpeed + run.runSpeed) * Time.deltaTime);
+//			combinedSpeed = (moveSpeed + run.runSpeed);
+			combinedSpeed = ((moveSpeed + run.runSpeed) * Time.deltaTime);
 		}
 		else
 		{
