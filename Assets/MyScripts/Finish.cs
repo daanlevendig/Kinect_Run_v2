@@ -5,12 +5,14 @@ using System.Collections;
 public class Finish : MonoBehaviour 
 {
 	public GameObject player;
-	public TakeDamage takeDamage;
+	public HUD hud;
+
+//	public GameObject 
 	
 	void Awake()
 	{
 		player = GameObject.FindGameObjectWithTag("Player");
-		takeDamage = player.GetComponent<TakeDamage>();
+		hud = player.GetComponent<HUD>();
 	}
 
 	void Update()
@@ -22,7 +24,7 @@ public class Finish : MonoBehaviour
 	{
 		if (player.transform.position.z > transform.position.z)
 		{
-			takeDamage.finished = true;
+			hud.finished = true;
 		}
 	}
 }

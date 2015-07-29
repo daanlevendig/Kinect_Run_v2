@@ -24,7 +24,7 @@ Platform assembly: C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test3_D
 Loading C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test3_Data\Managed\OpenCvSharp.dll into Unity Child Domain
 Platform assembly: C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test3_Data\Managed\ICSharpCode.SharpZipLib.dll (this message is harmless)
 Loading C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test3_Data\Managed\ICSharpCode.SharpZipLib.dll into Unity Child Domain
-- Completed reload, in  0.320 seconds
+- Completed reload, in  0.172 seconds
 <RI> Initializing input.
 XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
 <RI> Input initialized.
@@ -33,10 +33,28 @@ desktop: 1920x1080 60Hz; virtual: 3840x1080 at -1920,0
 Platform assembly: C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test3_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test3_Data\Managed\System.dll (this message is harmless)
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 149c -> priority: 1 
-Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 3.885476 ms
+  Thread -> id: c58 -> priority: 1 
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.799262 ms
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test3_Data/Mono/Kinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test3_Data/Mono/.\Kinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test3_Data/Mono/Kinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test3_Data/Mono/Kinect10
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test3_Data/Mono/.\Kinect10
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test3_Data/Mono/Kinect10
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test3_Data/Mono/libKinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test3_Data/Mono/.\libKinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test3_Data/Mono/libKinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test3_Data/Mono/Kinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test3_Data/Mono/.\Kinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test3_Data/Mono/Kinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test3_Data/Mono/Kinect10
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test3_Data/Mono/.\Kinect10
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test3_Data/Mono/Kinect10
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test3_Data/Mono/libKinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test3_Data/Mono/.\libKinect10.dll
+Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test3_Data/Mono/libKinect10.dll
 
-Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 2376.
-Total: 0.870015 ms (FindLiveObjects: 0.169692 ms CreateObjectMapping: 0.056450 ms MarkObjects: 0.617871 ms  DeleteObjects: 0.011632 ms)
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 2393.
+Total: 0.733851 ms (FindLiveObjects: 0.120426 ms CreateObjectMapping: 0.063634 ms MarkObjects: 0.524130 ms  DeleteObjects: 0.011632 ms)
 

@@ -3,19 +3,23 @@ using System.Collections;
 
 public class DealDamage : MonoBehaviour 
 {
-	public GameObject[] obstacles;
-	public Movement movement;
-	public TakeDamage takeDamage;
 	public GameObject player;
+	public Movement movement;
+	public FlashPlayer flash;
+	public Squat squat;
+	public Jump jump;
+	public HUD hud;
 	public Bounds bounds;
 
 	// Use this for initialization
 	void Start () 
 	{
-		obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
 		player = GameObject.FindGameObjectWithTag("Player");
 		movement = player.GetComponent<Movement>();
-		takeDamage = player.GetComponent<TakeDamage>();
+		flash = player.GetComponent<FlashPlayer>();
+		squat = player.GetComponent<Squat>();
+		jump = player.GetComponent<Jump>();
+		hud = player.GetComponent<HUD>();
 		bounds = new Bounds(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z)); 
 	}
 	 	
@@ -27,30 +31,31 @@ public class DealDamage : MonoBehaviour
 
 	void CollideWithPlayer()
 	{		
-		foreach (GameObject obstacle in obstacles)
+		bool isGate;
+
+		if (transform.position.y > 1.5f)
+			isGate = true;
+		else 
+			isGate = false;
+
+		if (!isGate || !squat.isSquatting)
 		{
-			bool isGate;
-
-			if (transform.position.y > 1.5f)
-				isGate = true;
-			else 
-				isGate = false;
-
-			if (!isGate || !movement.isCrouching)
+			if ((Mathf.Abs (transform.position.z - movement.moveForward) < (bounds.size.z/2 + 0.5f))
+		    && (jump.playerHeight < (transform.position.y + (bounds.size.y/2 + 0.5f)))
+		    && (jump.playerHeight >= (transform.position.y - (bounds.size.y/2 + 0.5f)))
+		    && (Mathf.Abs (transform.position.x - movement.transform.position.x) < (bounds.size.x/2f + 0.5f)))
 			{
-				if ((Mathf.Abs (transform.position.z - movement.moveForward) < (bounds.size.z/2 + 0.5f))
-				    && (movement.playerHeight < (transform.position.y + (bounds.size.y/2 + 0.5f)))
-				    && (movement.playerHeight >= (transform.position.y - (bounds.size.y/2 + 0.5f)))
-				    && (Mathf.Abs (transform.position.x - movement.transform.position.x) < (bounds.size.x/2f + 0.5f)))
+				hud.points -= 25.0000f;
+				if (!squat.isSquatting)
 				{
-					takeDamage.points -= (25.0000f/((float)(obstacles.Length)));
-					if (!movement.isCrouching)
-						Destroy (this);
-					else
-					{
-						movement.isCrouching = false;
-						Destroy (this);
-					}
+					flash.VisualHit();
+					Destroy (this);
+				}
+				else
+				{
+					squat.isSquatting = false;
+					flash.VisualHit();
+					Destroy (this);
 				}
 			}
 		}

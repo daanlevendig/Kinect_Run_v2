@@ -1,0 +1,56 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class FlashPlayer : MonoBehaviour 
+{
+	public MeshRenderer rend, headRend;
+	public GameObject head;
+	public Movement movement;
+
+	public bool isColliding;
+	
+	// Use this for initialization
+	void Start () 
+	{
+		head = GameObject.FindGameObjectWithTag("Head");
+		rend = GetComponent<MeshRenderer>();
+		headRend = head.GetComponent<MeshRenderer>();
+		movement = GetComponent<Movement>();
+
+		isColliding = false;
+	}
+	
+	public void VisualHit()
+	{
+		StartCoroutine(Flash());
+	}
+	
+	IEnumerator Flash()
+	{
+		isColliding = true;
+		rend.enabled = false;
+		headRend.enabled = false;
+		yield return new WaitForSeconds(0.1f);
+		rend.enabled = true;
+		headRend.enabled = true;
+		yield return new WaitForSeconds(0.1f);
+		rend.enabled = false;
+		headRend.enabled = false;
+		yield return new WaitForSeconds(0.1f);
+		rend.enabled = true;
+		headRend.enabled = true;
+		yield return new WaitForSeconds(0.1f);
+		rend.enabled = false;
+		headRend.enabled = false;
+		yield return new WaitForSeconds(0.1f);
+		rend.enabled = true;
+		headRend.enabled = true;
+		yield return new WaitForSeconds(0.1f);
+		rend.enabled = false;
+		headRend.enabled = false;
+		yield return new WaitForSeconds(0.1f);
+		rend.enabled = true;
+		headRend.enabled = true;
+		isColliding = false;
+	}
+}

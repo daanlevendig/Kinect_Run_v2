@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Run : MonoBehaviour 
 {
-	public enum Moving {Stopped, Walking, Jogging, Sprinting};
+	public enum Moving { Stopped, Walking, Jogging, Sprinting };
 	public int isMoving;
 
 	public Movement movement;
@@ -61,7 +61,7 @@ public class Run : MonoBehaviour
 		leftKneeDif = (Mathf.Abs (leftKneeY - lastLeftKneeY));
 		rightKneeDif = (Mathf.Abs(rightKneeY - lastRightKneeY));
 
-		if ((leftKneeDif >= 0.2f) || (rightKneeDif >= 0.2f))
+/*		if ((leftKneeDif >= 0.02f) || (rightKneeDif >= 0.02f))
 		{
 			isMoving = (int)Moving.Sprinting;
 			timestampLastMoved = getTimestamp();
@@ -71,7 +71,7 @@ public class Run : MonoBehaviour
 			isMoving = (int)Moving.Jogging;
 			timestampLastMoved = getTimestamp();
 		} 
-		else if ((leftKneeDif >= 0.005f) || (rightKneeDif >= 0.005f))
+		else */if ((leftKneeDif >= 0.005f) || (rightKneeDif >= 0.005f))
 		{
 			isMoving = (int)Moving.Walking;
 			timestampLastMoved = getTimestamp();
@@ -90,30 +90,34 @@ public class Run : MonoBehaviour
 				runSpeed = 0.0f;
 			break;
 		case 1:
-			if (runSpeed < 0.1f)
+			if (runSpeed < 0.15f)
 				runSpeed += 0.01f;
 			else
-				runSpeed = 0.1f;
+				runSpeed = 0.15f;
+//			if (runSpeed < 2.0f)
+//				runSpeed += 0.1f;
+//			else
+//				runSpeed = 2.0f;
 			break;
-		case 2:
+/*		case 2:
 			if (runSpeed < 0.2f)
 				runSpeed += 0.015f;
 			else
-				runSpeed = 0.02f;
+				runSpeed = 0.2f;
 			break;
 		case 3:
 			if (runSpeed < 0.3f)
 				runSpeed += 0.02f;
 			else
-				runSpeed = 0.03f;
-			break;
+				runSpeed = 0.3f;
+			break;*/
 		default:
-			Debug.Log ("error: isMoving 0x04011988-D44N");
+			Debug.Log ("error");
 			break;
 		}
 	}
 
-	void Running2()
+/*	void Running2()
 	{
 		leftAngleDif = (Mathf.Abs (leftLegAngle - lastLeftAngle));
 		rightAngleDif = (Mathf.Abs(rightLegAngle - lastRightAngle));
@@ -157,7 +161,7 @@ public class Run : MonoBehaviour
 			Debug.Log ("error: isMoving 0x04011988-D44N");
 			break;
 		}
-	}
+	}*/
 
 //	void Running()
 //	{		

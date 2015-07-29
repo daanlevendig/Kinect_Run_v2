@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class HitBalls : MonoBehaviour 
 {
 	public MeshRenderer rend;
-	public TakeDamage takeDamage;
+	public HUD hud;
 	public GameObject player;
 
 	public Vector3 randomDirection;
@@ -24,7 +24,7 @@ public class HitBalls : MonoBehaviour
 	{
 		rend = gameObject.GetComponent<MeshRenderer>();
 		player = GameObject.FindGameObjectWithTag("Player");
-		takeDamage = player.GetComponent<TakeDamage>();
+		hud = player.GetComponent<HUD>();
 
 		randomDirection = new Vector3(Random.Range(0f, 90f), Random.Range(-90f, 90f), Random.Range(-90f, 90f));
 		transform.Rotate(randomDirection);
@@ -46,9 +46,9 @@ public class HitBalls : MonoBehaviour
 	{
 		if (ballPunch)
 		{
-			ballSpeed = 0.05f;
+			ballSpeed = 0.01f;
 			startMoving = 1.0f;
-			takeDamage.points += 100.0f;
+			hud.points += 100.0f;
 		}
 
 		sideMove += ballSpeed;
@@ -84,19 +84,19 @@ public class HitBalls : MonoBehaviour
 	IEnumerator Flash()
 	{
 		rend.enabled = false;
-		yield return new WaitForSeconds(0.05f);
+		yield return new WaitForSeconds(0.1f);
 		rend.enabled = true;
-		yield return new WaitForSeconds(0.05f);
+		yield return new WaitForSeconds(0.1f);
 		rend.enabled = false;
-		yield return new WaitForSeconds(0.05f);
+		yield return new WaitForSeconds(0.1f);
 		rend.enabled = true;
-		yield return new WaitForSeconds(0.05f);
+		yield return new WaitForSeconds(0.1f);
 		rend.enabled = false;
-		yield return new WaitForSeconds(0.05f);
+		yield return new WaitForSeconds(0.1f);
 		rend.enabled = true;
-		yield return new WaitForSeconds(0.05f);
+		yield return new WaitForSeconds(0.1f);
 		rend.enabled = false;
-		yield return new WaitForSeconds(0.05f);
+		yield return new WaitForSeconds(0.1f);
 		rend.enabled = true;
 	}
 }

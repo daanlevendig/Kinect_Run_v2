@@ -4,24 +4,25 @@ using System.Collections.Generic;
 
 public class FlipMesh : MonoBehaviour
 {
-	public GameObject[] obstacles;
-	public MeshRenderer rend;
-	public Movement movement;
-	public GameObject player, head;
-	public TakeDamage takeDamage;
-	public HeadScript headScript;
 	public MeshRenderer[] children;
+	public MeshRenderer rend, headRend;
+	public GameObject player, head;
+	public Movement movement;
+	public Jump jump;
+	public Squat squat;
+	public HUD hud;
 	public Bounds bounds;
 	
 	// Use this for initialization
 	void Start () 
 	{
-		obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
 		player = GameObject.FindGameObjectWithTag("Player");
 		movement = player.GetComponent<Movement>();
-		takeDamage = player.GetComponent<TakeDamage>();
+		squat = player.GetComponent<Squat>();
+		jump = player.GetComponent<Jump>();
+		hud = player.GetComponent<HUD>();
 		head = GameObject.FindGameObjectWithTag("Head");
-		headScript = head.GetComponent<HeadScript>();
+		headRend = head.GetComponent<MeshRenderer>();
 		rend = gameObject.GetComponent<MeshRenderer>();
 		children = gameObject.GetComponentsInChildren<MeshRenderer>();
 		bounds = new Bounds(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z)); 
@@ -35,32 +36,27 @@ public class FlipMesh : MonoBehaviour
 	
 	void CollideWithPlayer()
 	{
-		foreach (GameObject obstacle in obstacles)
+		bool isGate;
+		
+		if (transform.position.y > 1.5f)
+			isGate = true;
+		else 
+			isGate = false;
+		
+		if (isGate && squat.isSquatting)
 		{
-			bool isGate;
-			
-			if (transform.position.y > 1.5f)
-				isGate = true;
-			else 
-				isGate = false;
-			
-			if (isGate && movement.isCrouching)
+			return;
+		}
+		else
+		{
+			if ((Mathf.Abs (transform.position.z - movement.moveForward) < (bounds.size.z/2 + 0.5f))
+		    && (jump.playerHeight < (transform.position.y + 1.5f))
+		    && (jump.playerHeight >= (transform.position.y - 1.5f))
+		    && (Mathf.Abs (transform.position.x - movement.transform.position.x) < (bounds.size.x/2 + 0.5f)))
 			{
-//				takeDamage.points += 25;
-				return;
-			}
-			else
-			{
-				if ((Mathf.Abs (transform.position.z - movement.moveForward) < (bounds.size.z/2 + 0.5f))
-			    && (movement.playerHeight < (transform.position.y + 1.5f))
-			    && (movement.playerHeight >= (transform.position.y - 1.5f))
-			    && (Mathf.Abs (transform.position.x - movement.transform.position.x) < (bounds.size.x/2 + 0.5f)))
-				{
-					takeDamage.VisualHit();
-					if (!movement.isCrouching)
-						headScript.VisualHit();
-					StartCoroutine(Flash());
-				}
+				hud.VisualHit();
+				if (!squat.isSquatting/* && headRend.enabled == true*/)
+				StartCoroutine(Flash());
 			}
 		}
 	}
@@ -70,31 +66,31 @@ public class FlipMesh : MonoBehaviour
 		rend.enabled = false;
 		foreach (MeshRenderer child in children)
 			child.enabled = false;
-		yield return new WaitForSeconds(0.05f);
+		yield return new WaitForSeconds(0.1f);
 		rend.enabled = true;
 		foreach (MeshRenderer child in children)
 			child.enabled = true;
-		yield return new WaitForSeconds(0.05f);
+		yield return new WaitForSeconds(0.1f);
 		rend.enabled = false;
 		foreach (MeshRenderer child in children)
 			child.enabled = false;
-		yield return new WaitForSeconds(0.05f);
+		yield return new WaitForSeconds(0.1f);
 		rend.enabled = true;
 		foreach (MeshRenderer child in children)
 			child.enabled = true;
-		yield return new WaitForSeconds(0.05f);
+		yield return new WaitForSeconds(0.1f);
 		rend.enabled = false;
 		foreach (MeshRenderer child in children)
 			child.enabled = false;
-		yield return new WaitForSeconds(0.05f);
+		yield return new WaitForSeconds(0.1f);
 		rend.enabled = true;
 		foreach (MeshRenderer child in children)
 			child.enabled = true;
-		yield return new WaitForSeconds(0.05f);
+		yield return new WaitForSeconds(0.1f);
 		rend.enabled = false;
 		foreach (MeshRenderer child in children)
 			child.enabled = false;
-		yield return new WaitForSeconds(0.05f);
+		yield return new WaitForSeconds(0.1f);
 		rend.enabled = true;
 		foreach (MeshRenderer child in children)
 			child.enabled = true;
