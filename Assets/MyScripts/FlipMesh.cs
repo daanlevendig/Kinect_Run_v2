@@ -10,7 +10,7 @@ public class FlipMesh : MonoBehaviour
 	public Movement movement;
 	public Jump jump;
 	public Squat squat;
-	public HUD hud;
+	public FlashPlayer flash;
 	public Bounds bounds;
 	
 	// Use this for initialization
@@ -20,7 +20,7 @@ public class FlipMesh : MonoBehaviour
 		movement = player.GetComponent<Movement>();
 		squat = player.GetComponent<Squat>();
 		jump = player.GetComponent<Jump>();
-		hud = player.GetComponent<HUD>();
+		flash = player.GetComponent<FlashPlayer>();
 		head = GameObject.FindGameObjectWithTag("Head");
 		headRend = head.GetComponent<MeshRenderer>();
 		rend = gameObject.GetComponent<MeshRenderer>();
@@ -54,9 +54,9 @@ public class FlipMesh : MonoBehaviour
 		    && (jump.playerHeight >= (transform.position.y - 1.5f))
 		    && (Mathf.Abs (transform.position.x - movement.transform.position.x) < (bounds.size.x/2 + 0.5f)))
 			{
-				hud.VisualHit();
-				if (!squat.isSquatting/* && headRend.enabled == true*/)
-				StartCoroutine(Flash());
+				flash.VisualHit();
+				if (!squat.isSquatting && !movement.isPaused)
+					StartCoroutine(Flash());
 			}
 		}
 	}

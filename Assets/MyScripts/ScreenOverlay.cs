@@ -3,8 +3,6 @@ using System.Collections;
 
 public class ScreenOverlay : MonoBehaviour 
 {
-//	public Text feedback;
-
 //	public GameObject scoreScreen;
 
 	public GameObject waitingForPlayer;

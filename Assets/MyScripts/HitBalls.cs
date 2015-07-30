@@ -68,11 +68,11 @@ public class HitBalls : MonoBehaviour
 
 	void Destroy()
 	{
-		if (transform.position.x > (initX + 5f) || transform.position.x < (initX - 5f))
+		if (transform.position.x > (initX + 5.0f) || transform.position.x < (initX - 5.0f))
 			gameObject.SetActive(false);
-		else if (transform.position.y > (initY + 5f) || transform.position.y < (initY - 1f))
+		else if (transform.position.y > (initY + 5.0f) || transform.position.y < (initY - 2.0f))
 			gameObject.SetActive(false);
-		else if (transform.position.z > (initZ + 15f) || transform.position.z < (initZ - 1f))
+		else if (transform.position.z > (initZ + 15.0f) || transform.position.z < (initZ - 2.0f))
 		    gameObject.SetActive(false);
 	}
 

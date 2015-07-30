@@ -11,7 +11,7 @@ public class LoadGame : MonoBehaviour
 
 	IEnumerator StartGame()
 	{
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(1.5f);
 		Application.LoadLevel(1);
 	}
 }

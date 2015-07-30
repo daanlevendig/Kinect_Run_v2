@@ -22,7 +22,8 @@ public class FlashPlayer : MonoBehaviour
 	
 	public void VisualHit()
 	{
-		StartCoroutine(Flash());
+		if (!movement.isPaused)
+			StartCoroutine(Flash());
 	}
 	
 	IEnumerator Flash()

@@ -28,8 +28,11 @@ public class Run : MonoBehaviour
 
 		movement = GetComponent<Movement>();
 
-		leftLegAngle = 180f;
-		rightLegAngle = 180f;
+//		leftLegAngle = 180f;
+//		rightLegAngle = 180f;
+
+		leftKneeDif = 0.0f;
+		rightKneeDif = 0.0f;
 
 		isRunning = false;
 	}
@@ -71,7 +74,9 @@ public class Run : MonoBehaviour
 			isMoving = (int)Moving.Jogging;
 			timestampLastMoved = getTimestamp();
 		} 
-		else */if ((leftKneeDif >= 0.005f) || (rightKneeDif >= 0.005f))
+		else */
+		if (((leftKneeDif >= 0.05f) && (leftKneeY > (bottomSpineY - 0.15f))) 
+		|| ((rightKneeDif >= 0.05f) && (rightKneeY > (bottomSpineY - 0.15f))))
 		{
 			isMoving = (int)Moving.Walking;
 			timestampLastMoved = getTimestamp();
@@ -94,10 +99,10 @@ public class Run : MonoBehaviour
 //				runSpeed += 0.01f;
 //			else
 //				runSpeed = 0.15f;
-			if (runSpeed < 2.0f)
-				runSpeed += 0.1f;
+			if (runSpeed < 3.0f)
+				runSpeed += 0.2f;
 			else
-				runSpeed = 2.0f;
+				runSpeed = 6.0f;
 			break;
 /*		case 2:
 			if (runSpeed < 0.2f)

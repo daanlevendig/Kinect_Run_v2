@@ -39,7 +39,7 @@ public class Jump : MonoBehaviour
 	void Update () 
 	{		
 		// Distance temps for delta calculation
-		if (transform.position.z > 0.5f)
+		if (transform.position.z > 1.0f)
 		{
 			bottomDif = movement.bottomSpine.y - lastBottom;
 		}
@@ -55,7 +55,6 @@ public class Jump : MonoBehaviour
 			Dojump();
 		}
 
-		
 		lastBottom = movement.bottomSpine.y;
 	}
 

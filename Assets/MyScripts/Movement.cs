@@ -21,6 +21,7 @@ public class Movement : MonoBehaviour
 	
 	public KinectManager manager;
 
+	public Squat squat;
 	public Jump jump;
 	public Run run;
 	public HUD hud;
@@ -48,17 +49,18 @@ public class Movement : MonoBehaviour
 	{
 		hud = gameObject.GetComponent<HUD>();
 		run = GetComponent<Run>();
+		squat = GetComponent<Squat>();
 		jump = GetComponent<Jump>();
 		screen = GameObject.FindGameObjectWithTag("ScreenOverlay");
 		overlay = screen.GetComponent<ScreenOverlay>();
 		
-		rightBoundry = 0.6f;
-		leftBoundry = -0.6f;
-		moveSideways = 5.0f;
+		rightBoundry = 0.3f;
+		leftBoundry = -0.3f;
+		moveSideways = 10.0f;
 		
 		moveForward = 0.0f;
 //		moveSpeed = 0.25f;
-		moveSpeed = 7.0f;
+		moveSpeed = 6.0f;
 		combinedSpeed = 0.0f;
 		
 		// vertical normal vector for hip angle
@@ -73,6 +75,7 @@ public class Movement : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		// show pause screen and return if isPaused
 		if (isPaused)
 		{
 			overlay.waitingForPlayer.SetActive(false);
@@ -82,7 +85,7 @@ public class Movement : MonoBehaviour
 		}
 		overlay.pauseScreen.SetActive(false);
 		
-		// setup kinect
+		// setup kinect & return if no user found
 		manager = KinectManager.Instance;
 		long userID = manager ? manager.GetUserIdByIndex (0) : 0;
 		if (userID == 0)
@@ -147,7 +150,10 @@ public class Movement : MonoBehaviour
 		if (!hud.finished)
 		{
 //			combinedSpeed = (moveSpeed + run.runSpeed);
-			combinedSpeed = ((moveSpeed + run.runSpeed) * Time.deltaTime);
+			if (!squat.isSquatting && !jump.isJumping)
+				combinedSpeed = ((moveSpeed + run.runSpeed) * Time.deltaTime);
+			else
+				combinedSpeed = moveSpeed * Time.deltaTime;
 		}
 		else
 		{

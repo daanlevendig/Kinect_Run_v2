@@ -5,6 +5,7 @@ public class Punch : MonoBehaviour
 {
 	public Movement movement;
 	public HUD hud;
+	public FlashPlayer flash;
 
 	public GameObject[] balls;
 	
@@ -59,7 +60,7 @@ public class Punch : MonoBehaviour
 				{
 					hud.points -= (10.0000f/((float)(balls.Length)));
 					hit.VisualHit();
-					hud.VisualHit();
+					flash.VisualHit();
 				}
 			}
 		}

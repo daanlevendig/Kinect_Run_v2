@@ -13,6 +13,15 @@ public class Pause : MonoBehaviour
 		movement = player.GetComponent<Movement>();
 	}
 
+	void Update()
+	{
+		if (!movement.isPaused)
+		{
+			if (Input.GetKeyDown(KeyCode.P))
+				movement.isPaused = true;
+		}
+	}
+
 	public void SetPaused()
 	{
 		movement.isPaused = true;

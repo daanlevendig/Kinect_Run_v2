@@ -46,37 +46,38 @@ public class HUD : MonoBehaviour
 			Timer ();
 	}
 
-	public void VisualHit()
-	{
-		StartCoroutine(Flash());
-	}
+//	public void VisualHit()
+//	{
+//		if (!movement.isPaused)
+//			StartCoroutine(Flash());
+//	}
 	
-	IEnumerator Flash()
-	{
-		rend.enabled = false;
-		headRend.enabled = false;
-		yield return new WaitForSeconds(0.1f);
-		rend.enabled = true;
-		headRend.enabled = true;
-		yield return new WaitForSeconds(0.1f);
-		rend.enabled = false;
-		headRend.enabled = false;
-		yield return new WaitForSeconds(0.1f);
-		rend.enabled = true;
-		headRend.enabled = true;
-		yield return new WaitForSeconds(0.1f);
-		rend.enabled = false;
-		headRend.enabled = false;
-		yield return new WaitForSeconds(0.1f);
-		rend.enabled = true;
-		headRend.enabled = true;
-		yield return new WaitForSeconds(0.1f);
-		rend.enabled = false;
-		headRend.enabled = false;
-		yield return new WaitForSeconds(0.1f);
-		rend.enabled = true;
-		headRend.enabled = true;
-	}
+//	IEnumerator Flash()
+//	{
+//		rend.enabled = false;
+//		headRend.enabled = false;
+//		yield return new WaitForSeconds(0.1f);
+//		rend.enabled = true;
+//		headRend.enabled = true;
+//		yield return new WaitForSeconds(0.1f);
+//		rend.enabled = false;
+//		headRend.enabled = false;
+//		yield return new WaitForSeconds(0.1f);
+//		rend.enabled = true;
+//		headRend.enabled = true;
+//		yield return new WaitForSeconds(0.1f);
+//		rend.enabled = false;
+//		headRend.enabled = false;
+//		yield return new WaitForSeconds(0.1f);
+//		rend.enabled = true;
+//		headRend.enabled = true;
+//		yield return new WaitForSeconds(0.1f);
+//		rend.enabled = false;
+//		headRend.enabled = false;
+//		yield return new WaitForSeconds(0.1f);
+//		rend.enabled = true;
+//		headRend.enabled = true;
+//	}
 	
 	// Timer
 	void Timer()

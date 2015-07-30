@@ -33,12 +33,12 @@ public class Squat : MonoBehaviour
 
 	void Dosquat()
 	{
-		if ((movement.bottomSpine.y <= (jump.yBottom - 0.2f))/* && (movement.bodyAngle <= 20.0f)*/)
+		if (movement.bottomSpine.y <= (jump.yBottom - 0.2f))
 		{
 			isSquatting = true;
 			headRend.enabled = false;
 		}
-		else if (((movement.bottomSpine.y > (jump.yBottom - 0.2f)) /*|| (movement.bodyAngle > 20.0f)*/ && !flash.isColliding))
+		else if (((movement.bottomSpine.y > (jump.yBottom - 0.2f)) && !flash.isColliding))
 		{
 			isSquatting = false;
 			headRend.enabled = true;

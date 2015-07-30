@@ -6,8 +6,6 @@ public class Finish : MonoBehaviour
 {
 	public GameObject player;
 	public HUD hud;
-
-//	public GameObject 
 	
 	void Awake()
 	{
