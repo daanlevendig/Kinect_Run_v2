@@ -129,7 +129,7 @@ public class KinectManager : MonoBehaviour
 	// Color map
 	//private KinectInterop.ColorBuffer colorImage;
 	//private Texture2D usersClrTex;
-	private Rect usersClrRect;
+	public Rect usersClrRect;
 	private int usersClrSize;
 	
 	// Kinect body frame data
@@ -1521,7 +1521,7 @@ public class KinectManager : MonoBehaviour
 					float displayWidth = cameraRect.width * displayMapsWidthPercent;
 					float displayHeight = cameraRect.width * displayMapsHeightPercent;
 					
-					usersClrRect = new Rect(cameraRect.width - displayWidth, cameraRect.height, displayWidth, -displayHeight);
+					usersClrRect = new Rect(cameraRect.width - (displayWidth/1.25f), cameraRect.height - (displayHeight/3f), displayWidth, -displayHeight);
 						
 //					if(computeUserMap && displayColorMap)
 //					{

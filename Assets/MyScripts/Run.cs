@@ -95,14 +95,14 @@ public class Run : MonoBehaviour
 				runSpeed = 0.0f;
 			break;
 		case 1:
-//			if (runSpeed < 0.15f)
-//				runSpeed += 0.01f;
-//			else
-//				runSpeed = 0.15f;
-			if (runSpeed < 3.0f)
-				runSpeed += 0.2f;
+			if (runSpeed < 0.15f)
+				runSpeed += 0.01f;
 			else
-				runSpeed = 6.0f;
+				runSpeed = 0.15f;
+//			if (runSpeed < 3.0f)
+//				runSpeed += 0.2f;
+//			else
+//				runSpeed = 6.0f;
 			break;
 /*		case 2:
 			if (runSpeed < 0.2f)

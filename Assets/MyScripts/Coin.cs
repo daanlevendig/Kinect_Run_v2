@@ -44,7 +44,7 @@ public class Coin : MonoBehaviour
 	    && (Mathf.Abs(player.transform.position.y - transform.position.y) < 0.9f)
 	    && (Mathf.Abs(player.transform.position.z - transform.position.z) < 0.9f))
 		{
-			hud.points += 100.0000f;
+			hud.points += 10.0000f;
 			gameObject.SetActive(false);
 		}
 	}

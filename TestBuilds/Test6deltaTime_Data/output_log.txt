@@ -24,7 +24,7 @@ Platform assembly: C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test6de
 Loading C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test6deltaTime_Data\Managed\OpenCvSharp.dll into Unity Child Domain
 Platform assembly: C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test6deltaTime_Data\Managed\ICSharpCode.SharpZipLib.dll (this message is harmless)
 Loading C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test6deltaTime_Data\Managed\ICSharpCode.SharpZipLib.dll into Unity Child Domain
-- Completed reload, in  0.339 seconds
+- Completed reload, in  0.243 seconds
 <RI> Initializing input.
 XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
 <RI> Input initialized.
@@ -51,16 +51,16 @@ Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_
 Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test6deltaTime_Data/Mono/.\libKinect10.dll
 Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test6deltaTime_Data/Mono/libKinect10.dll
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 1f24 -> priority: 1 
+  Thread -> id: 1184 -> priority: 1 
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 3.977507 ms
+UnloadTime: 5.262516 ms
 
 Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 497.
-Total: 0.407809 ms (FindLiveObjects: 0.035238 ms CreateObjectMapping: 0.029080 ms MarkObjects: 0.319199 ms  DeleteObjects: 0.008895 ms)
+Total: 0.400966 ms (FindLiveObjects: 0.029080 ms CreateObjectMapping: 0.024632 ms MarkObjects: 0.323305 ms  DeleteObjects: 0.010605 ms)
 
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 1.680159 ms
+UnloadTime: 2.805740 ms
 
 Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 1899.
-Total: 0.851883 ms (FindLiveObjects: 0.100583 ms CreateObjectMapping: 0.052344 ms MarkObjects: 0.683901 ms  DeleteObjects: 0.013684 ms)
+Total: 0.652768 ms (FindLiveObjects: 0.092372 ms CreateObjectMapping: 0.038317 ms MarkObjects: 0.509419 ms  DeleteObjects: 0.011974 ms)
 

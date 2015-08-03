@@ -24,7 +24,7 @@ Platform assembly: C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5_D
 Loading C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5_Data\Managed\OpenCvSharp.dll into Unity Child Domain
 Platform assembly: C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5_Data\Managed\ICSharpCode.SharpZipLib.dll (this message is harmless)
 Loading C:\Users\daanl_000\Documents\Kinect_Run_v2\TestBuilds\Test5_Data\Managed\ICSharpCode.SharpZipLib.dll into Unity Child Domain
-- Completed reload, in  0.051 seconds
+- Completed reload, in  0.236 seconds
 <RI> Initializing input.
 XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
 <RI> Input initialized.
@@ -51,24 +51,18 @@ Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_
 Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test5_Data/Mono/.\libKinect10.dll
 Fallback handler could not load library C:/Users/daanl_000/Documents/Kinect_Run_v2/TestBuilds/Test5_Data/Mono/libKinect10.dll
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 10a4 -> priority: 1 
+  Thread -> id: 898 -> priority: 1 
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 3.177626 ms
+UnloadTime: 4.034641 ms
 
 Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 497.
-Total: 0.418414 ms (FindLiveObjects: 0.029764 ms CreateObjectMapping: 0.020869 ms MarkObjects: 0.344174 ms  DeleteObjects: 0.009237 ms)
-
-Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 2.798898 ms
-
-Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 497.
-Total: 0.383176 ms (FindLiveObjects: 0.037291 ms CreateObjectMapping: 0.015395 ms MarkObjects: 0.321936 ms  DeleteObjects: 0.007868 ms)
+Total: 0.511472 ms (FindLiveObjects: 0.045160 ms CreateObjectMapping: 0.052686 ms MarkObjects: 0.390703 ms  DeleteObjects: 0.010263 ms)
 
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.708876 ms
+UnloadTime: 4.259757 ms
 
 Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 1899.
-Total: 0.655163 ms (FindLiveObjects: 0.090320 ms CreateObjectMapping: 0.039686 ms MarkObjects: 0.512498 ms  DeleteObjects: 0.011974 ms)
+Total: 0.955546 ms (FindLiveObjects: 0.131032 ms CreateObjectMapping: 0.060897 ms MarkObjects: 0.745483 ms  DeleteObjects: 0.017106 ms)
 
 NullReferenceException: Object reference not set to an instance of an object
   at Movement.Start () [0x00000] in <filename unknown>:0 

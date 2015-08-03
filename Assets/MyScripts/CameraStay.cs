@@ -6,7 +6,7 @@ public class CameraStay : MonoBehaviour
 {
 	private GameObject player;
 	private float playerZUpdate;
-	private float playerXUpdate;
+//	private float playerXUpdate;
 	
 	// Use this for initialization
 	void Start () 
@@ -18,9 +18,12 @@ public class CameraStay : MonoBehaviour
 	void Update () 
 	{		
 		playerZUpdate = player.transform.position.z - 8.5f;
-		playerXUpdate = player.transform.position.x;
+//		playerXUpdate = player.transform.position.x;
 
 		// position of the camera relative to the player
-		transform.position = new Vector3(playerXUpdate, 8.0f, playerZUpdate);
+		// follow on the x-axis
+//		transform.position = new Vector3(playerXUpdate, 8.0f, playerZUpdate);
+		// fixed x-axis
+		transform.position = new Vector3(0.0f, 8.0f, playerZUpdate);
 	}
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Punch : MonoBehaviour 
+public class Punch : MonoBehaviour
 {
 	public Movement movement;
 	public HUD hud;
@@ -50,8 +50,8 @@ public class Punch : MonoBehaviour
 			
 			if ((Mathf.Abs(ball.transform.position.z - movement.moveForward) <= 3.5f) && !hit.ballPunch)
 			{
-				if (((movement.leftHand.z < (movement.leftShoulder.z - 0.3f)) && (leftHandDif < -0.05f)) 
-				    || ((movement.rightHand.z < (movement.rightShoulder.z - 0.3f)) && (rightHandDif < -0.05f)))
+				if (((movement.leftHand.z < (movement.leftShoulder.z - 0.2f)) && (leftHandDif < -0.05f)) 
+				|| ((movement.rightHand.z < (movement.rightShoulder.z - 0.2f)) && (rightHandDif < -0.05f)))
 				{
 					hit.ballPunch = true;
 				}

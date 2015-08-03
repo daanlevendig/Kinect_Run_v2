@@ -13,6 +13,8 @@ public class Jump : MonoBehaviour
 	public float jumpSpeed;
 	public float fallSpeed;
 	public float yBottom;
+	public float squatThreshold;
+	public float jumpThreshold;
 	public float lastBottom;
 
 	public bool isJumping;
@@ -24,12 +26,12 @@ public class Jump : MonoBehaviour
 		movement = gameObject.GetComponent<Movement>();
 		squat = gameObject.GetComponent<Squat>();
 
-		playerHeight = 0.5f;
+		playerHeight = 1.0f;
 		bottomDif = 0.0f;
-		floorHeight = 0.5f;
-		maxJumpHeight = 2.5f;
-		jumpSpeed = 0.2f;
-		fallSpeed = 0.1f;
+		floorHeight = 1.0f;
+		maxJumpHeight = 3.5f;
+		jumpSpeed = 0.25f;
+		fallSpeed = 0.15f;
 
 		isJumping = false;
 		reachedJumpTop = false;
@@ -45,12 +47,14 @@ public class Jump : MonoBehaviour
 		}
 		else if (transform.position.z <= 1.0f)
 		{
-			yBottom = movement.bottomSpine.y;
+			yBottom = movement.stored.yBottom;
+			squatThreshold = (yBottom - movement.lowestFoot) * 0.85f;
+			jumpThreshold = yBottom * 1.1f;
 		}
 
 		VerticalMovement();
 
-		if (isJumping && !squat.isSquatting)
+		if (isJumping)
 		{
 			Dojump();
 		}
@@ -61,7 +65,7 @@ public class Jump : MonoBehaviour
 	void VerticalMovement()
 	{
 		// if player is going up fast: jump
-		if ((bottomDif >= 0.05f) && (movement.bottomSpine.y > (yBottom - 0.1f)))
+		if ((bottomDif >= 0.05f) && (movement.bottomSpine.y > (jumpThreshold)))
 		{
 			isJumping = true;
 		}

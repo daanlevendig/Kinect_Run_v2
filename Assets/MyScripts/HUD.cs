@@ -45,39 +45,6 @@ public class HUD : MonoBehaviour
 		if (movement.begin && !finished)
 			Timer ();
 	}
-
-//	public void VisualHit()
-//	{
-//		if (!movement.isPaused)
-//			StartCoroutine(Flash());
-//	}
-	
-//	IEnumerator Flash()
-//	{
-//		rend.enabled = false;
-//		headRend.enabled = false;
-//		yield return new WaitForSeconds(0.1f);
-//		rend.enabled = true;
-//		headRend.enabled = true;
-//		yield return new WaitForSeconds(0.1f);
-//		rend.enabled = false;
-//		headRend.enabled = false;
-//		yield return new WaitForSeconds(0.1f);
-//		rend.enabled = true;
-//		headRend.enabled = true;
-//		yield return new WaitForSeconds(0.1f);
-//		rend.enabled = false;
-//		headRend.enabled = false;
-//		yield return new WaitForSeconds(0.1f);
-//		rend.enabled = true;
-//		headRend.enabled = true;
-//		yield return new WaitForSeconds(0.1f);
-//		rend.enabled = false;
-//		headRend.enabled = false;
-//		yield return new WaitForSeconds(0.1f);
-//		rend.enabled = true;
-//		headRend.enabled = true;
-//	}
 	
 	// Timer
 	void Timer()

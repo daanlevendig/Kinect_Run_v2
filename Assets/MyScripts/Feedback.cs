@@ -10,6 +10,7 @@ public class Feedback : MonoBehaviour
 
 	public Movement movement;
 	public Run run;
+	public Jump jump;
 
 	public bool debugOnOff;
 
@@ -22,6 +23,7 @@ public class Feedback : MonoBehaviour
 
 		movement = player.GetComponent<Movement>();
 		run = player.GetComponent<Run>();
+		jump = player.GetComponent<Jump>();
 
 		debugOnOff = true;
 	}
@@ -32,8 +34,8 @@ public class Feedback : MonoBehaviour
 		if (debugOnOff)
 		{
 			// Feedback text in-game
-			feedback.text = string.Format(" movespeed: {0} \n all speed combined: {1} \n left dif: {2} \n right dif: {3} \n runspeed: {4} \n Body angle: {5}",
-			                              movement.moveSpeed,        movement.combinedSpeed,             run.leftKneeDif,   run.rightKneeDif, run.runSpeed,   movement.bodyAngle);
+			feedback.text = string.Format(" movespeed: {0} \n all speed combined: {1} \n left dif: {2} \n right dif: {3} \n runspeed: {4} \n Body angle: {5} \n threshold {6}",
+			                              movement.moveSpeed, movement.combinedSpeed, run.leftKneeDif, run.rightKneeDif, run.runSpeed, movement.bodyAngle, jump.squatThreshold);
 
 			// Console Debug
 //			Debug.Log (string.Format ("L: {0}, R: {1}", run.leftKneeDif, run.rightKneeDif));

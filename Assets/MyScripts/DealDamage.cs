@@ -41,8 +41,8 @@ public class DealDamage : MonoBehaviour
 		if (!isGate || !squat.isSquatting)
 		{
 			if ((Mathf.Abs (transform.position.z - movement.moveForward) < (bounds.size.z/2 + 0.5f))
-		    && (jump.playerHeight < (transform.position.y + (bounds.size.y/2 + 0.5f)))
-		    && (jump.playerHeight >= (transform.position.y - (bounds.size.y/2 + 0.5f)))
+		    && (jump.playerHeight < (transform.position.y + (bounds.size.y/2 + 1.0f)))
+		    && (jump.playerHeight >= (transform.position.y - (bounds.size.y/2 + 1.0f)))
 		    && (Mathf.Abs (transform.position.x - movement.transform.position.x) < (bounds.size.x/2f + 0.5f)))
 			{
 				hud.points -= 25.0000f;
