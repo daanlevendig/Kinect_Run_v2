@@ -64,7 +64,7 @@ public class BodyInit : MonoBehaviour
 			return;
 		}
 		else
-			noUser = "";
+			noUser = "\n";
 
 		bottomSpine = manager.GetJointPosition (userID, 0);
 		bottomHead = manager.GetJointPosition (userID, 2);
@@ -90,12 +90,12 @@ public class BodyInit : MonoBehaviour
 		}
 		else 
 		{
-			inRange = "";
+			inRange = "\n";
 			distanceBool = true;
 		}
 
 		// check for straight legs
-		if ((leftLegAngle < 170.0f) || (rightLegAngle < 170.0f) || (leftUp < 165.0f) || (rightUp < 165.0f))
+		if ((leftLegAngle < 165.0f) || (rightLegAngle < 165.0f) || (leftUp < 155.0f) || (rightUp < 155.0f))
 		{
 			straightKnees = "Stand up straight!\n";
 			angleBool = false;
@@ -114,7 +114,7 @@ public class BodyInit : MonoBehaviour
 		}
 		else
 		{
-			groundedFeet = "";
+			groundedFeet = "\n";
 			groundedBool = true;
 		}
 

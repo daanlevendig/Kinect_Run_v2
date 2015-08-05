@@ -46,7 +46,7 @@ public class HitBalls : MonoBehaviour
 	{
 		if (ballPunch)
 		{
-			ballSpeed = 0.005f;
+			ballSpeed = 0.001f;
 			startMoving = 1.0f;
 			hud.points += 100.0f;
 		}

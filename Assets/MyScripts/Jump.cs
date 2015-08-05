@@ -31,7 +31,7 @@ public class Jump : MonoBehaviour
 		floorHeight = 1.0f;
 		maxJumpHeight = 3.5f;
 		jumpSpeed = 0.25f;
-		fallSpeed = 0.15f;
+		fallSpeed = 0.2f;
 
 		isJumping = false;
 		reachedJumpTop = false;

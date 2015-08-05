@@ -33,7 +33,7 @@ public class Movement : MonoBehaviour
 	public Jump jump;
 	public Run run;
 	public HUD hud;
-	public GameObject screen;
+	public GameObject screen, finish;
 	public ScreenOverlay overlay;
 	
 	// Left & Right
@@ -63,13 +63,14 @@ public class Movement : MonoBehaviour
 		jump = GetComponent<Jump>();
 		screen = GameObject.FindGameObjectWithTag("ScreenOverlay");
 		overlay = screen.GetComponent<ScreenOverlay>();
+		finish = GameObject.FindGameObjectWithTag("Finish");
 		
 		rightBoundry = 0.3f;
 		leftBoundry = -0.3f;
 		moveSideways = 10.0f;
 		
 		moveForward = 0.0f;
-		moveSpeed = 0.25f;
+		moveSpeed = 0.3f;
 //		moveSpeed = 6.0f;
 		combinedSpeed = 0.0f;
 		
@@ -175,14 +176,14 @@ public class Movement : MonoBehaviour
 		{
 //			combinedSpeed = ((moveSpeed + run.runSpeed) * Time.fixedDeltaTime);
 			if (!squat.isSquatting && !jump.isJumping)
-				combinedSpeed = (moveSpeed + run.runSpeed);
+				combinedSpeed = (moveSpeed + run.runSpeed  + (transform.position.z/(finish.transform.position.z * 4.0f)));
 			else
-				combinedSpeed = moveSpeed /* Time.fixedDeltaTime*/;
+				combinedSpeed = moveSpeed/*  + (transform.position.z/(finish.transform.position.z * 2.0f)) + Time.fixedDeltaTime*/;
 		}
 		else
 		{
 			if (combinedSpeed > 0.0f)
-				combinedSpeed -= 0.01f;
+				combinedSpeed -= 0.025f;
 			else
 				combinedSpeed = 0.0f;
 		}

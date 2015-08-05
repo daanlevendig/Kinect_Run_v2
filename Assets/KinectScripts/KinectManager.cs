@@ -1521,7 +1521,7 @@ public class KinectManager : MonoBehaviour
 					float displayWidth = cameraRect.width * displayMapsWidthPercent;
 					float displayHeight = cameraRect.width * displayMapsHeightPercent;
 					
-					usersClrRect = new Rect(cameraRect.width - (displayWidth/1.25f), cameraRect.height - (displayHeight/3f), displayWidth, -displayHeight);
+					usersClrRect = new Rect(/*cameraRect.width - (displayWidth/1.25f)*/ -150f, /*cameraRect.height - (displayHeight/2f)*/ 800f, displayWidth * 1.75f, -displayHeight * 1.75f);
 						
 //					if(computeUserMap && displayColorMap)
 //					{

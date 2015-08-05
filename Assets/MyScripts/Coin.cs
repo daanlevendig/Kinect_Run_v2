@@ -12,6 +12,8 @@ public class Coin : MonoBehaviour
 	public Movement movement;
 	public HUD hud;
 
+	public MeshRenderer rend;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -19,6 +21,8 @@ public class Coin : MonoBehaviour
 
 		movement = player.GetComponent<Movement>();
 		hud = player.GetComponent<HUD>();
+
+		rend = GetComponent<MeshRenderer>();
 
 		randomDirection = new Vector3(0,0, Random.Range(-180f, 180f));
 		transform.Rotate(randomDirection);
@@ -31,6 +35,15 @@ public class Coin : MonoBehaviour
 	{
 		Spin ();
 		CollideWithPlayer();
+		FarAway();
+	}
+
+	void FarAway()
+	{
+		if ((transform.position.z - player.transform.position.z) > 100.0f)
+			rend.enabled = false;
+		else
+			rend.enabled = true;
 	}
 
 	void Spin()

@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class Pause : MonoBehaviour 
+public class Pause : MonoBehaviour
 {
 	public Movement movement;
 	public GameObject player;

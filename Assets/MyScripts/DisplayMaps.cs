@@ -17,15 +17,14 @@ public class DisplayMaps : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		manager.usersClrRect(500f, );
-		Debug.Log (level);
+//		manager.usersClrRect = new Rect(-150.0f,800.0f,1011.5f,-569.0f);
+//		Debug.Log (level);
 		level = Application.loadedLevel;
 		switch(level)
 		{
 		case 0:
 			manager.computeColorMap = false;
 			manager.displayColorMap = false;
-
 			break;
 		case 1:
 			manager.computeColorMap = true;
