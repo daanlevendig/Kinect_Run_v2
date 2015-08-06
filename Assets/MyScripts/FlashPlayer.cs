@@ -6,6 +6,7 @@ public class FlashPlayer : MonoBehaviour
 	public MeshRenderer rend, headRend;
 	public GameObject head;
 	public Movement movement;
+	public Squat squat;
 
 	public bool isColliding;
 	
@@ -16,6 +17,7 @@ public class FlashPlayer : MonoBehaviour
 		rend = GetComponent<MeshRenderer>();
 		headRend = head.GetComponent<MeshRenderer>();
 		movement = GetComponent<Movement>();
+		squat = GetComponent<Squat>();
 
 		isColliding = false;
 	}

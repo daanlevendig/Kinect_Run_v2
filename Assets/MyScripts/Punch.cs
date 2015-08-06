@@ -19,6 +19,7 @@ public class Punch : MonoBehaviour
 	{
 		balls = GameObject.FindGameObjectsWithTag("Ball");
 
+		flash = GetComponent<FlashPlayer>();
 		hud = GetComponent<HUD>();
 		movement = GetComponent<Movement>();
 
@@ -48,7 +49,7 @@ public class Punch : MonoBehaviour
 		{
 			HitBalls hit = ball.GetComponent<HitBalls>();
 			
-			if ((Mathf.Abs(ball.transform.position.z - movement.moveForward) <= 3.5f) && !hit.ballPunch)
+			if ((Mathf.Abs(ball.transform.position.z - movement.moveForward) <= 5.0f) && !hit.ballPunch)
 			{
 				if (((movement.leftHand.z < (movement.leftShoulder.z - 0.2f)) && (leftHandDif < -0.05f)) 
 				|| ((movement.rightHand.z < (movement.rightShoulder.z - 0.2f)) && (rightHandDif < -0.05f)))

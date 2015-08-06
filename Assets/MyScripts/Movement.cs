@@ -176,7 +176,7 @@ public class Movement : MonoBehaviour
 		{
 //			combinedSpeed = ((moveSpeed + run.runSpeed) * Time.fixedDeltaTime);
 			if (!squat.isSquatting && !jump.isJumping)
-				combinedSpeed = (moveSpeed + run.runSpeed  + (transform.position.z/(finish.transform.position.z * 4.0f)));
+				combinedSpeed = (moveSpeed + run.runSpeed/*  + (transform.position.z/(finish.transform.position.z * 4.0f))*/);
 			else
 				combinedSpeed = moveSpeed/*  + (transform.position.z/(finish.transform.position.z * 2.0f)) + Time.fixedDeltaTime*/;
 		}

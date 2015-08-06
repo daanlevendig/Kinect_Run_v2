@@ -83,7 +83,7 @@ public class BodyInit : MonoBehaviour
 			inRange = "Too far!\n";
 			distanceBool = false;
 		}
-		else if (bottomSpine.z < 1.5f)
+		else if (bottomSpine.z < 1.25f)
 		{
 			inRange = "Too close!\n";
 			distanceBool = false;

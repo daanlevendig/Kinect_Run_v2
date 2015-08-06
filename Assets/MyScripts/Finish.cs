@@ -39,8 +39,8 @@ public class Finish : MonoBehaviour
 
 	IEnumerator Screen()
 	{
-		score.text = "Score:\n" + hud.points.ToString() + "\n\nTime:\n" + hud.clock;
-		yield return new WaitForSeconds(3);
+		score.text = "Score:\n" + hud.endPoints + "\n\nTime:\n" + hud.clock;
+		yield return new WaitForSeconds(2);
 		scoreScreen.SetActive(true);
 	}
 }
