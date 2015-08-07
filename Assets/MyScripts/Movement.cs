@@ -55,6 +55,7 @@ public class Movement : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		Cursor.visible = false;
 		values = GameObject.FindGameObjectWithTag("Values");
 		stored = values.GetComponent<StoredValues>();
 		hud = gameObject.GetComponent<HUD>();
@@ -81,7 +82,7 @@ public class Movement : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
 		// show pause screen and return if isPaused
 		if (isPaused)
@@ -89,8 +90,11 @@ public class Movement : MonoBehaviour
 			overlay.waitingForPlayer.SetActive(false);
 			overlay.pauseScreen.SetActive(true);
 			begin = false;
+			Cursor.visible = true;
 			return;
 		}
+		else
+			Cursor.visible = false;
 		overlay.pauseScreen.SetActive(false);
 		
 		// setup kinect & return if no user found

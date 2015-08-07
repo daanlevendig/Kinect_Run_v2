@@ -19,7 +19,7 @@ public class Finish : MonoBehaviour
 
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
 		if (!hud.finished)
 			scoreScreen.SetActive(false);
@@ -42,5 +42,6 @@ public class Finish : MonoBehaviour
 		score.text = "Score:\n" + hud.endPoints + "\n\nTime:\n" + hud.clock;
 		yield return new WaitForSeconds(2);
 		scoreScreen.SetActive(true);
+		Cursor.visible = true;
 	}
 }

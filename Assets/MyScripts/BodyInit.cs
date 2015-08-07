@@ -2,6 +2,12 @@
 using UnityEngine.UI;
 using System.Collections;
 
+/// <summary>
+/// Body init.
+/// The experience of the gameplay depends on good initialisation of the body
+/// </summary>
+
+
 public class BodyInit : MonoBehaviour
 {
 	public KinectManager manager;

@@ -34,7 +34,7 @@ public class HUD : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
 		if (points <= 0.0f)
 			points = 0.0f;

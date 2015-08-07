@@ -13,12 +13,12 @@ public class CameraStay : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{		
 		// position of the camera relative to the player
 		// follow on the x-axis
-//		transform.position = new Vector3(player.transform.position.x, 8.0f, player.transform.position.z - 8.5f);
+		transform.position = new Vector3(player.transform.position.x, 8.0f, player.transform.position.z - 8.5f);
 		// fixed x-axis
-		transform.position = new Vector3(0.0f, 8.0f, player.transform.position.z - 8.5f);
+//		transform.position = new Vector3(0.0f, 8.0f, player.transform.position.z - 8.5f);
 	}
 }

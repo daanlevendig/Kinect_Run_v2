@@ -32,28 +32,36 @@ public class FlashPlayer : MonoBehaviour
 	{
 		isColliding = true;
 		rend.enabled = false;
-		headRend.enabled = false;
+		if (!squat.isSquatting)
+			headRend.enabled = false;
 		yield return new WaitForSeconds(0.1f);
 		rend.enabled = true;
-		headRend.enabled = true;
+		if (!squat.isSquatting)
+			headRend.enabled = true;
 		yield return new WaitForSeconds(0.1f);
 		rend.enabled = false;
-		headRend.enabled = false;
+		if (!squat.isSquatting)
+			headRend.enabled = false;
 		yield return new WaitForSeconds(0.1f);
 		rend.enabled = true;
-		headRend.enabled = true;
+		if (!squat.isSquatting)
+			headRend.enabled = true;
 		yield return new WaitForSeconds(0.1f);
 		rend.enabled = false;
-		headRend.enabled = false;
+		if (!squat.isSquatting)
+			headRend.enabled = false;
 		yield return new WaitForSeconds(0.1f);
 		rend.enabled = true;
-		headRend.enabled = true;
+		if (!squat.isSquatting)
+			headRend.enabled = true;
 		yield return new WaitForSeconds(0.1f);
 		rend.enabled = false;
-		headRend.enabled = false;
+		if (!squat.isSquatting)
+			headRend.enabled = false;
 		yield return new WaitForSeconds(0.1f);
 		rend.enabled = true;
-		headRend.enabled = true;
+		if (!squat.isSquatting)
+			headRend.enabled = true;
 		isColliding = false;
 	}
 }

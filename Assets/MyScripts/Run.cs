@@ -38,7 +38,7 @@ public class Run : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
 		// Using Knee Height
 		leftKneeY = movement.leftKnee.y;

@@ -38,7 +38,7 @@ public class Jump : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{		
 		// Distance temps for delta calculation
 		if (transform.position.z > 1.0f)

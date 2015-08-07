@@ -14,7 +14,7 @@ public class FarObjectRenderer : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
 		if (transform.position.z >= (player.transform.position.z - 60f))
 			rend.enabled = true;

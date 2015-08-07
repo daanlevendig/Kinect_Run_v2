@@ -7,7 +7,7 @@ public class Punch : MonoBehaviour
 	public HUD hud;
 	public FlashPlayer flash;
 
-	public GameObject[] balls;
+	public GameObject[] blocks;
 	
 	public float leftHandDif;
 	public float rightHandDif;
@@ -17,7 +17,7 @@ public class Punch : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		balls = GameObject.FindGameObjectsWithTag("Ball");
+		blocks = GameObject.FindGameObjectsWithTag("Ball");
 
 		flash = GetComponent<FlashPlayer>();
 		hud = GetComponent<HUD>();
@@ -28,7 +28,7 @@ public class Punch : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
 		// Distance temps for delta calculation
 		if (transform.position.z > 0.5f)
@@ -45,21 +45,21 @@ public class Punch : MonoBehaviour
 
 	void Dopunch()
 	{
-		foreach (GameObject ball in balls)
+		foreach (GameObject block in blocks)
 		{
-			HitBalls hit = ball.GetComponent<HitBalls>();
+			HitBlocks hit = block.GetComponent<HitBlocks>();
 			
-			if ((Mathf.Abs(ball.transform.position.z - movement.moveForward) <= 5.0f) && !hit.ballPunch)
+			if ((Mathf.Abs(block.transform.position.z - movement.moveForward) <= 5.0f) && !hit.wallPunch)
 			{
 				if (((movement.leftHand.z < (movement.leftShoulder.z - 0.2f)) && (leftHandDif < -0.05f)) 
 				|| ((movement.rightHand.z < (movement.rightShoulder.z - 0.2f)) && (rightHandDif < -0.05f)))
 				{
-					hit.ballPunch = true;
+					hit.wallPunch = true;
 				}
 				
-				if ((Mathf.Abs(ball.transform.position.z - movement.moveForward) <= 1.0f) && !hit.ballPunch)
+				if ((Mathf.Abs(block.transform.position.z - movement.moveForward) <= 1.0f) && !hit.wallPunch)
 				{
-					hud.points -= (10.0000f/((float)(balls.Length)));
+					hud.points -= (10.0000f/((float)(blocks.Length)));
 					hit.VisualHit();
 					flash.VisualHit();
 				}

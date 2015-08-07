@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class HitBalls : MonoBehaviour 
+public class HitBlocks : MonoBehaviour 
 {
 	public MeshRenderer rend;
 	public HUD hud;
@@ -10,14 +10,14 @@ public class HitBalls : MonoBehaviour
 
 	public Vector3 randomDirection;
 
-	public float ballSpeed;
+	public float blockSpeed;
 	public float sideMove;
 	public float upMove; 
 	public float forwardMove;
 	public float startMoving;
 	public float initX, initY, initZ;
 
-	public bool ballPunch;
+	public bool wallPunch;
 
 	// Use this for initialization
 	void Start () 
@@ -29,37 +29,37 @@ public class HitBalls : MonoBehaviour
 		randomDirection = new Vector3(Random.Range(0f, 90f), Random.Range(-90f, 90f), Random.Range(-90f, 90f));
 		transform.Rotate(randomDirection);
 
-		ballSpeed = 0.0f;
+		blockSpeed = 0.0f;
 		startMoving = 0.0f;
 		sideMove = transform.position.x;
 		upMove = transform.position.y;
 		forwardMove = transform.position.z;
 
-		ballPunch = false;
+		wallPunch = false;
 		
 		initX = sideMove;
 		initY = upMove;
 		initZ = forwardMove;
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
-		if (ballPunch)
+		if (wallPunch)
 		{
-			ballSpeed = 0.001f;
+			blockSpeed = 0.001f;
 			startMoving = 1.0f;
 			hud.points += 100.0f;
 		}
 
-		sideMove += ballSpeed;
-		upMove += ballSpeed;
-		forwardMove += ballSpeed;
+		sideMove += blockSpeed;
+		upMove += blockSpeed;
+		forwardMove += blockSpeed;
 
-		MoveBall();
+		MoveBlocks();
 		Destroy();
 	}
 
-	void MoveBall()
+	void MoveBlocks()
 	{
 		transform.Translate (Vector3.right * sideMove * startMoving * Time.deltaTime);
 		transform.Translate (Vector3.up * upMove * startMoving * Time.deltaTime);
