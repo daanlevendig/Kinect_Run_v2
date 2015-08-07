@@ -13,7 +13,7 @@ public class Pause : MonoBehaviour
 		movement = player.GetComponent<Movement>();
 	}
 
-	void FixedUpdate()
+	void Update()
 	{
 		if (!movement.isPaused)
 		{

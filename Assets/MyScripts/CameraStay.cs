@@ -17,8 +17,8 @@ public class CameraStay : MonoBehaviour
 	{		
 		// position of the camera relative to the player
 		// follow on the x-axis
-		transform.position = new Vector3(player.transform.position.x, 8.0f, player.transform.position.z - 8.5f);
+//		transform.position = new Vector3(player.transform.position.x, 8.0f, player.transform.position.z - 8.5f);
 		// fixed x-axis
-//		transform.position = new Vector3(0.0f, 8.0f, player.transform.position.z - 8.5f);
+		transform.position = new Vector3(0.0f, 8.0f, player.transform.position.z - 8.5f);
 	}
 }

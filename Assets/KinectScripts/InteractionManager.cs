@@ -234,6 +234,7 @@ public class InteractionManager : MonoBehaviour
 	{
 		instance = this;
 		interactionInited = true;
+		Cursor.visible = false;
 	}
 	
 	void OnDestroy()

@@ -38,7 +38,7 @@ public class Jump : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () 
+	void Update () 
 	{		
 		// Distance temps for delta calculation
 		if (transform.position.z > 1.0f)
@@ -49,7 +49,7 @@ public class Jump : MonoBehaviour
 		{
 			yBottom = movement.stored.yBottom;
 			squatThreshold = (yBottom - movement.lowestFoot) * 0.85f;
-			jumpThreshold = yBottom * 1.1f;
+			jumpThreshold = yBottom * 1.05f;
 		}
 
 		VerticalMovement();

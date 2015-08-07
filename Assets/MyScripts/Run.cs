@@ -28,9 +28,6 @@ public class Run : MonoBehaviour
 
 		movement = GetComponent<Movement>();
 
-//		leftLegAngle = 180f;
-//		rightLegAngle = 180f;
-
 		leftKneeDif = 0.0f;
 		rightKneeDif = 0.0f;
 
@@ -48,15 +45,6 @@ public class Run : MonoBehaviour
 
 		lastLeftKneeY = movement.leftKnee.y;
 		lastRightKneeY = movement.rightKnee.y;
-
-		// Using Knee Angles
-//		leftLegAngle = movement.leftLegAngle;
-//		rightLegAngle = movement.rightLegAngle;
-//
-//		Running2();
-//
-//		lastLeftAngle = movement.leftLegAngle;
-//		lastRightAngle = movement.rightLegAngle;
 	}
 
 	void Running1()

@@ -66,12 +66,12 @@ public class Movement : MonoBehaviour
 		overlay = screen.GetComponent<ScreenOverlay>();
 		finish = GameObject.FindGameObjectWithTag("Finish");
 		
-		rightBoundry = 0.3f;
-		leftBoundry = -0.3f;
-		moveSideways = 10.0f;
+		rightBoundry = 0.5f;
+		leftBoundry = -0.5f;
+		moveSideways = 6.0f;
 		
 		moveForward = 0.0f;
-		moveSpeed = 0.3f;
+		moveSpeed = 0.25f;
 //		moveSpeed = 6.0f;
 		combinedSpeed = 0.0f;
 		
@@ -80,7 +80,18 @@ public class Movement : MonoBehaviour
 
 		begin = false;
 	}
-	
+
+	 
+	void IncreaseSpeed ()
+	{
+		if (transform.position.z > 300.0f && transform.position.z <= 600.0f)
+			moveSpeed = 0.275f;
+		else if (transform.position.z > 600.0f)
+			moveSpeed = 0.3f;
+		//else if (transform.position.z > 900.0f)
+		//	moveSpeed = 0.325f;
+	}
+
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
