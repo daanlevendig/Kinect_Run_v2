@@ -28,7 +28,7 @@ public class Punch : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () 
+	void FixedUpdate ()
 	{
 		// Distance temps for delta calculation
 		if (transform.position.z > 0.5f)

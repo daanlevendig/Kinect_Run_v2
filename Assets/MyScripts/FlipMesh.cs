@@ -25,7 +25,8 @@ public class FlipMesh : MonoBehaviour
 		headRend = head.GetComponent<MeshRenderer>();
 		rend = gameObject.GetComponent<MeshRenderer>();
 		children = gameObject.GetComponentsInChildren<MeshRenderer>();
-		bounds = new Bounds(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z)); 
+		bounds = new Bounds(new Vector3(transform.position.x, transform.position.y, transform.position.z), 
+		                    new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z)); 
 	}
 	
 	// Update is called once per frame

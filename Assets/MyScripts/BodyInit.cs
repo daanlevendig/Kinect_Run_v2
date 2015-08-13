@@ -30,7 +30,7 @@ public class BodyInit : MonoBehaviour
 	public Vector3 leftUpperLeg, leftLowerLeg;
 	public Vector3 rightUpperLeg, rightLowerLeg;
 
-	public float leftLegAngle, rightLegAngle, leftUp, rightUp, lowestFoot, yBottom;
+	public float leftLegAngle, rightLegAngle, leftUp, rightUp, lowestFoot, yBottom, yKneeBase;
 
 	public bool distanceBool, angleBool, groundedBool, coroutineStarted;
 
@@ -129,10 +129,6 @@ public class BodyInit : MonoBehaviour
 			coroutineStarted = true;
 			StartCoroutine(InitCount());
 		}
-
-//		kneeAngles.text = (string.Format("left: {0}\nright: {1}",leftUp, rightUp));
-//		kneeAngles.text = (string.Format("left: {0}\nright: {1}",leftLegAngle, rightLegAngle));
-//		kneeAngles.text = (string.Format("left: {0}\nright: {1}",leftFoot.y, rightFoot.y));
 	}
 
 	void LegAngles()

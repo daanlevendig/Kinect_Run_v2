@@ -41,7 +41,7 @@ public class Movement : MonoBehaviour
 	public float rightBoundry;
 	public float moveSideways;
 	public float xMove;
-	public float xChest;
+	public float xChest, xBottom;
 	
 	// Forward
 	public float moveForward;
@@ -49,7 +49,7 @@ public class Movement : MonoBehaviour
 	public float combinedSpeed;
 
 	public bool begin;
-	
+	public bool keepRunning;
 	public bool isPaused;
 	
 	// Use this for initialization
@@ -66,30 +66,19 @@ public class Movement : MonoBehaviour
 		overlay = screen.GetComponent<ScreenOverlay>();
 		finish = GameObject.FindGameObjectWithTag("Finish");
 		
-		rightBoundry = 0.5f;
-		leftBoundry = -0.5f;
-		moveSideways = 6.0f;
+		rightBoundry = 0.6f;
+		leftBoundry = -0.6f;
+		moveSideways = 5.0f;
 		
 		moveForward = 0.0f;
-		moveSpeed = 0.25f;
-//		moveSpeed = 6.0f;
+		moveSpeed = 0.175f;
 		combinedSpeed = 0.0f;
 		
 		// vertical normal vector for hip angle
 		hipUp = new Vector3(0.0f, 1.0f, 0.0f);
 
+		keepRunning = false;
 		begin = false;
-	}
-
-	 
-	void IncreaseSpeed ()
-	{
-		if (transform.position.z > 300.0f && transform.position.z <= 600.0f)
-			moveSpeed = 0.275f;
-		else if (transform.position.z > 600.0f)
-			moveSpeed = 0.3f;
-		//else if (transform.position.z > 900.0f)
-		//	moveSpeed = 0.325f;
 	}
 
 	// Update is called once per frame
@@ -134,10 +123,7 @@ public class Movement : MonoBehaviour
 		rightFoot = manager.GetJointPosition (userID, 19);
 		
 		xChest = bottomHead.x;
-
-
-//		Debug.Log (string.Format ("Low Foot: {0}, Butt: {1}", lowestFoot, bottomSpine.y));
-
+		xBottom = bottomSpine.x;
 
 		// Horizontal movement
 		HorizontalMovement();
@@ -169,16 +155,16 @@ public class Movement : MonoBehaviour
 	// function for movement in all axis' actually
 	void HorizontalMovement()
 	{
-		if (xChest <= rightBoundry && xChest >= leftBoundry)
+		if (xBottom <= rightBoundry && xBottom >= leftBoundry)
 		{
-			xMove = (xChest * moveSideways);
+			xMove = (xBottom * moveSideways);
 			transform.position = new Vector3(xMove, jump.playerHeight, moveForward);
 		}
-		else if (xChest > rightBoundry)
+		else if (xBottom > rightBoundry)
 		{
 			transform.position = new Vector3((rightBoundry * moveSideways), jump.playerHeight, moveForward);
 		}
-		else if (xChest < leftBoundry)
+		else if (xBottom < leftBoundry)
 		{
 			transform.position = new Vector3((leftBoundry * moveSideways), jump.playerHeight, moveForward);
 		}
@@ -189,20 +175,24 @@ public class Movement : MonoBehaviour
 	{
 		if (!hud.finished)
 		{
-//			combinedSpeed = ((moveSpeed + run.runSpeed) * Time.fixedDeltaTime);
 			if (!squat.isSquatting && !jump.isJumping)
 				combinedSpeed = (moveSpeed + run.runSpeed/*  + (transform.position.z/(finish.transform.position.z * 4.0f))*/);
 			else
-				combinedSpeed = moveSpeed/*  + (transform.position.z/(finish.transform.position.z * 2.0f)) + Time.fixedDeltaTime*/;
+				combinedSpeed = moveSpeed/*  + (transform.position.z/(finish.transform.position.z * 2.0f))*/;
 		}
 		else
 		{
 			if (combinedSpeed > 0.0f)
-				combinedSpeed -= 0.025f;
+				combinedSpeed -= 0.01f;
 			else
 				combinedSpeed = 0.0f;
 		}
 		moveForward += combinedSpeed;
-//		moveForward += combinedSpeed * Time.deltaTime;
+	}
+
+	IEnumerator stopKeepRunning()
+	{
+		yield return new WaitForSeconds(2);
+		keepRunning = false;
 	}
 }

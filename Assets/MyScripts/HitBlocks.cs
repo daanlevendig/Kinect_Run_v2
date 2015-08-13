@@ -29,7 +29,6 @@ public class HitBlocks : MonoBehaviour
 		randomDirection = new Vector3(Random.Range(0f, 90f), Random.Range(-90f, 90f), Random.Range(-90f, 90f));
 		transform.Rotate(randomDirection);
 
-		blockSpeed = 0.0f;
 		startMoving = 0.0f;
 		sideMove = transform.position.x;
 		upMove = transform.position.y;
@@ -46,14 +45,10 @@ public class HitBlocks : MonoBehaviour
 	{
 		if (wallPunch)
 		{
-			blockSpeed = 0.001f;
 			startMoving = 1.0f;
-			hud.points += 100.0f;
+			hud.points += 1.0f;
 		}
 
-		sideMove += blockSpeed;
-		upMove += blockSpeed;
-		forwardMove += blockSpeed;
 
 		MoveBlocks();
 		Destroy();
@@ -61,9 +56,9 @@ public class HitBlocks : MonoBehaviour
 
 	void MoveBlocks()
 	{
-		transform.Translate (Vector3.right * sideMove * startMoving * Time.deltaTime);
-		transform.Translate (Vector3.up * upMove * startMoving * Time.deltaTime);
-		transform.Translate (Vector3.forward * forwardMove * startMoving * Time.deltaTime);
+		transform.Translate (Vector3.right * startMoving);
+		transform.Translate (Vector3.up * startMoving);
+		transform.Translate (Vector3.forward * startMoving);
 	}
 
 	void Destroy()

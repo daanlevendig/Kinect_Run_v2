@@ -4,6 +4,7 @@ using System.Collections;
 public class StoredValues : MonoBehaviour
 {
 	public float yBottom;
+
 	// Use this for initialization
 	void Start () 
 	{
