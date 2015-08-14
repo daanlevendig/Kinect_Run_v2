@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.Collections;
 
@@ -11,13 +12,17 @@ public class Run : MonoBehaviour
 	public Movement movement;
 	public HUD hud;
 
+	public Slider slider;
+	public GameObject speedSlider;
+
 	public int steps, maxSteps, leftStepCount, rightStepCount;
 
 	public float leftKneeY, lastLeftKneeY;
 	public float rightKneeY, lastRightKneeY;
 	public float bottomSpineY;
-	public float runSpeed;
+	public float runSpeed, lastRunSpeed;
 	public float runThreshold;
+	public float vel;
 
 	private double timestampLastMoved;
 
@@ -25,8 +30,10 @@ public class Run : MonoBehaviour
 	void Start () 
 	{
 		runSpeed = 0.0f;
+		lastRunSpeed = 0.0f;
+		vel = 0.1f;
 
-		maxSteps = 30;
+		maxSteps = 25;
 		leftSteps = new double[maxSteps];
 		rightSteps = new double[maxSteps];
 
@@ -34,13 +41,16 @@ public class Run : MonoBehaviour
 		movement = GetComponent<Movement>();
 		hud = GetComponent<HUD>();
 
-		runThreshold = movement.stored.yBottom - 0.25f;
+		runThreshold = ((movement.stored.yBottom - movement.stored.lowestFoot) * 0.6f);
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
 		bottomSpineY = movement.bottomSpine.y;
+
+		speedSlider = GameObject.FindGameObjectWithTag("RunSpeed");
+		slider = speedSlider.GetComponent<Slider>();
 
 		// Using Knee Height
 		leftKneeY = movement.leftKnee.y;
@@ -52,9 +62,16 @@ public class Run : MonoBehaviour
 		RightLegRemove();
 		Steps();
 		Runspeed();
+		AdjustSlider();
 
 		lastLeftKneeY = leftKneeY;
 		lastRightKneeY = rightKneeY;
+		lastRunSpeed = runSpeed;
+	}
+
+	void AdjustSlider()
+	{
+		slider.value = Mathf.SmoothDamp((lastRunSpeed / 0.333f),(runSpeed / 0.333f), ref vel, 0.1f);
 	}
 
 	void Runspeed()

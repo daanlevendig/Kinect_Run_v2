@@ -22,13 +22,14 @@ public class Movement : MonoBehaviour
 	public Vector3 rightFoot;
 	public Vector3 body;
 	public Vector3 hipUp;
+
 	public float bodyAngle;
 	public float lowestFoot;
-	
+
+	// inherrited scripts
 	public KinectManager manager;
 	public GameObject values;
 	public StoredValues stored;
-	
 	public Squat squat;
 	public Jump jump;
 	public Run run;
@@ -41,7 +42,7 @@ public class Movement : MonoBehaviour
 	public float rightBoundry;
 	public float moveSideways;
 	public float xMove;
-	public float xChest, xBottom;
+	public float xBottom;
 	
 	// Forward
 	public float moveForward;
@@ -66,9 +67,9 @@ public class Movement : MonoBehaviour
 		overlay = screen.GetComponent<ScreenOverlay>();
 		finish = GameObject.FindGameObjectWithTag("Finish");
 		
-		rightBoundry = 0.6f;
-		leftBoundry = -0.6f;
-		moveSideways = 5.0f;
+		rightBoundry = 0.4f;
+		leftBoundry = -0.4f;
+		moveSideways = 7.5f;
 		
 		moveForward = 0.0f;
 		moveSpeed = 0.125f;
@@ -109,6 +110,7 @@ public class Movement : MonoBehaviour
 		begin = true;
 		overlay.waitingForPlayer.SetActive(false);
 
+		// set joints
 		bottomSpine = manager.GetJointPosition (userID, 0);
 		bottomHead = manager.GetJointPosition (userID, 2);
 		leftShoulder = manager.GetJointPosition (userID, 4);
@@ -121,8 +123,7 @@ public class Movement : MonoBehaviour
 		rightHip = manager.GetJointPosition (userID, 16);
 		rightKnee = manager.GetJointPosition (userID, 17);
 		rightFoot = manager.GetJointPosition (userID, 19);
-		
-		xChest = bottomHead.x;
+
 		xBottom = bottomSpine.x;
 
 		// Horizontal movement

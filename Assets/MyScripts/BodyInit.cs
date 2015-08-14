@@ -26,7 +26,6 @@ public class BodyInit : MonoBehaviour
 	public Vector3 rightHip;
 	public Vector3 rightKnee;
 	public Vector3 rightFoot;
-
 	public Vector3 leftUpperLeg, leftLowerLeg;
 	public Vector3 rightUpperLeg, rightLowerLeg;
 
@@ -72,6 +71,7 @@ public class BodyInit : MonoBehaviour
 		else
 			noUser = "\n";
 
+		// 
 		bottomSpine = manager.GetJointPosition (userID, 0);
 		bottomHead = manager.GetJointPosition (userID, 2);
 		leftHip = manager.GetJointPosition (userID, 12);
@@ -96,9 +96,9 @@ public class BodyInit : MonoBehaviour
 		}
 		else 
 		{
+			distanceBool = true;
 			StartCoroutine(Delay ());
 			inRange = "\n";
-			distanceBool = true;
 		}
 
 		// check for straight legs
@@ -109,9 +109,9 @@ public class BodyInit : MonoBehaviour
 		}
 		else
 		{
+			angleBool = true;
 			StartCoroutine(Delay ());
 			straightKnees = "\n";
-			angleBool = true;
 		}
 
 		// check for feet on ground
@@ -122,9 +122,9 @@ public class BodyInit : MonoBehaviour
 		}
 		else
 		{
+			groundedBool = true;
 			StartCoroutine(Delay ());
 			groundedFeet = "\n";
-			groundedBool = true;
 		}
 
 		if (distanceBool && angleBool && groundedBool && !coroutineStarted)
@@ -163,11 +163,6 @@ public class BodyInit : MonoBehaviour
 		{
 			yBottom = bottomSpine.y;
 			stored.yBottom = yBottom;
-//			if (leftFoot.y < rightFoot.y)
-//				lowestFoot = leftFoot.y;
-//			else
-//				lowestFoot = rightFoot.y;
-//			stored.lowestFoot = lowestFoot;
 			Application.LoadLevel(2);
 		}
 		else

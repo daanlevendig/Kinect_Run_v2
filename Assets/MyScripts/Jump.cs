@@ -47,7 +47,9 @@ public class Jump : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{		
+		// makes fallspeed relative to running speed
 		fallSpeed = (movement.combinedSpeed / 2.0f);
+
 		// Distance temps for delta calculation
 		if (transform.position.z > 1.0f)
 		{
@@ -57,23 +59,26 @@ public class Jump : MonoBehaviour
 		{
 			yBottom = movement.stored.yBottom;
 			squatThreshold = (yBottom - movement.lowestFoot) * 0.85f;
-			jumpThreshold = yBottom * 1.05f;
+			jumpThreshold = yBottom * 1.025f;
 		}
 
+		// Handles Jumping booleans
 		VerticalMovement();
 
+		// Jump when all is checked
 		if (isJumping)
 		{
 			Dojump();
 		}
 
+		// set bottom.y at end of frame for differences in next frame
 		lastBottom = movement.bottomSpine.y;
 	}
 
 	void VerticalMovement()
 	{
 		// if player is going up fast: jump
-		if ((bottomDif >= 0.05f) && (movement.bottomSpine.y > (jumpThreshold)) && ((movement.rightFoot.y - movement.leftFoot.y) < 0.1f))
+		if ((bottomDif >= 0.05f) && (movement.bottomSpine.y > (jumpThreshold)) && (Mathf.Abs(movement.rightFoot.y - movement.leftFoot.y) < 0.1f))
 		{
 			isJumping = true;
 		}
