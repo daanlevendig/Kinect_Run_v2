@@ -28,7 +28,7 @@ public class Movement : MonoBehaviour
 	public KinectManager manager;
 	public GameObject values;
 	public StoredValues stored;
-
+	
 	public Squat squat;
 	public Jump jump;
 	public Run run;
@@ -71,7 +71,7 @@ public class Movement : MonoBehaviour
 		moveSideways = 5.0f;
 		
 		moveForward = 0.0f;
-		moveSpeed = 0.175f;
+		moveSpeed = 0.125f;
 		combinedSpeed = 0.0f;
 		
 		// vertical normal vector for hip angle
@@ -175,15 +175,12 @@ public class Movement : MonoBehaviour
 	{
 		if (!hud.finished)
 		{
-			if (!squat.isSquatting && !jump.isJumping)
-				combinedSpeed = (moveSpeed + run.runSpeed/*  + (transform.position.z/(finish.transform.position.z * 4.0f))*/);
-			else
-				combinedSpeed = moveSpeed/*  + (transform.position.z/(finish.transform.position.z * 2.0f))*/;
+				combinedSpeed = (moveSpeed + run.runSpeed);
 		}
 		else
 		{
 			if (combinedSpeed > 0.0f)
-				combinedSpeed -= 0.01f;
+				combinedSpeed -= 0.005f;
 			else
 				combinedSpeed = 0.0f;
 		}

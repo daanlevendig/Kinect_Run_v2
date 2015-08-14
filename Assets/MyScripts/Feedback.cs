@@ -28,8 +28,8 @@ public class Feedback : MonoBehaviour
 	void Update () 
 	{
 		// Feedback text in-game
-		feedback.text = string.Format(" left dif: {0} \n right dif: {1} \n runspeed: {2}",
-		                              run.leftKneeDif, run.rightKneeDif, run.runSpeed);
+		feedback.text = string.Format(" runspeed: {0} \n left count: {1} \n right count: {2} \n steps: {3}",
+		                              run.runSpeed, run.leftStepCount, run.rightStepCount, run.steps);
 
 		// Console Debug
 //		Debug.Log (string.Format ("L: {0}, R: {1}", run.leftKneeDif, run.rightKneeDif));

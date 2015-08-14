@@ -1,27 +1,23 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public class Run : MonoBehaviour 
 {
-	public enum Moving { Stopped, Walking, Jogging, Running };
-	public int isMoving;
+	public double[] leftSteps;
+	public double[] rightSteps;
 
+	public Jump jump;
 	public Movement movement;
 	public HUD hud;
 
-	public int steps, maxSteps;
+	public int steps, maxSteps, leftStepCount, rightStepCount;
 
-	public float leftLegAngle, lastLeftAngle, leftAngleDif;
-	public float rightLegAngle, lastRightAngle, rightAngleDif;
-	public float leftKneeY, lastLeftKneeY, leftKneeDif;
-	public float rightKneeY, lastRightKneeY, rightKneeDif;
+	public float leftKneeY, lastLeftKneeY;
+	public float rightKneeY, lastRightKneeY;
 	public float bottomSpineY;
-	public float lastBottom;
 	public float runSpeed;
-
-	double temp1, temp2, temp3;
-
-	public bool isRunning;
+	public float runThreshold;
 
 	private double timestampLastMoved;
 
@@ -29,125 +25,92 @@ public class Run : MonoBehaviour
 	void Start () 
 	{
 		runSpeed = 0.0f;
-		isMoving = (int)Moving.Stopped;
 
+		maxSteps = 30;
+		leftSteps = new double[maxSteps];
+		rightSteps = new double[maxSteps];
+
+		jump = GetComponent<Jump>();
 		movement = GetComponent<Movement>();
 		hud = GetComponent<HUD>();
 
-		leftKneeDif = 0.0f;
-		rightKneeDif = 0.0f;
-
-		isRunning = false;
+		runThreshold = movement.stored.yBottom - 0.25f;
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () 
+	void Update () 
 	{
+		bottomSpineY = movement.bottomSpine.y;
+
 		// Using Knee Height
 		leftKneeY = movement.leftKnee.y;
 		rightKneeY = movement.rightKnee.y;
 
-		Running();
+		LeftLegAdd();
+		RightLegAdd();
+		LeftLegRemove();
+		RightLegRemove();
+		Steps();
+		Runspeed();
 
-		// #TODO check what the extreme knee-differences per frame are
-		if(leftKneeDif > 0f || rightKneeDif > 0f)
-			Debug.Log(string.Format("left: {0}, right: {1}", leftKneeDif, rightKneeDif));
-
-		if (hud.seconds == 10)
-			temp1 = System.DateTime.UtcNow.Ticks;
-		else if (hud.seconds == 12)
-		{
-			temp2 = System.DateTime.UtcNow.Ticks;
-			temp3 = temp2 - temp1;
-		}
-		Debug.Log (temp3);
-
-		lastLeftKneeY = movement.leftKnee.y;
-		lastRightKneeY = movement.rightKnee.y;
+		lastLeftKneeY = leftKneeY;
+		lastRightKneeY = rightKneeY;
 	}
 
-//	void RunningTest ()
-//	{
-//		timestampLastMoved = getTimestamp() - 2;
-//
-//		if ((leftKneeY > (bottomSpineY)) || (rightKneeY > (bottomSpineY)))
-//
-//
-//
-//
-//		if (timestampLastMoved < (getTimestamp() - 2))
-//
-//		for (steps = 0; steps < maxSteps; steps++)
-//		{
-//		
-//
-//		}
-//
-//	}
-
-	void Running ()
+	void Runspeed()
 	{
-		// check the y-difference each frame
-		leftKneeDif = (Mathf.Abs (leftKneeY - lastLeftKneeY));
-		rightKneeDif = (Mathf.Abs(rightKneeY - lastRightKneeY));
+		runSpeed = (float)(steps/75.0);
+	}
 
-		// conditions for running: 
-		// significant difference in y value = knees going up or down 
-		// knees have to be above a certain threshold
-		/*if (((leftKneeDif >= 0.05f) && (leftKneeY > (bottomSpineY - 0.05f))) 
-		    || ((rightKneeDif >= 0.05f) && (rightKneeY > (bottomSpineY - 0.05f))))
+	void LeftLegAdd()
+	{
+		if ((lastLeftKneeY <= runThreshold) && (leftKneeY > runThreshold))
 		{
-//			isMoving = (int)Moving.Running;
-			timestampLastMoved = getTimestamp();
-		} 
-		else if (((leftKneeDif >= 0.05f) && (leftKneeY > (bottomSpineY - 0.10f))) 
-		    || ((rightKneeDif >= 0.05f) && (rightKneeY > (bottomSpineY - 0.10f))))
-		{
-//			isMoving = (int)Moving.Jogging;
-			timestampLastMoved = getTimestamp();
-		} 
-		else */if (((leftKneeDif >= 0.05f) && (leftKneeY > (bottomSpineY - 0.15f))) 
-		|| ((rightKneeDif >= 0.05f) && (rightKneeY > (bottomSpineY - 0.15f))))
-		{
-//			isMoving = (int)Moving.Walking;
-			timestampLastMoved = getTimestamp();
-		} 
-		else if (getTimestamp() - timestampLastMoved > 0.75)
-		{
-			isMoving = (int)Moving.Stopped;
+			leftSteps[leftStepCount] = getTimestamp();
+			leftStepCount++;
 		}
+	}
 
-
-		switch(isMoving)
+	void LeftLegRemove()
+	{
+		if (leftSteps[0] < (getTimestamp() - 5.0))
 		{
-		case 0:
-			if (runSpeed > 0.0f)
-				runSpeed -= 0.02f;
-			else
-				runSpeed = 0.0f;
-			break;
-		case 1:
-			if (runSpeed < 0.15f)
-				runSpeed += 0.01f;
-			else
-				runSpeed = 0.15f;
-			break;
-		case 2:
-			if (runSpeed < 0.2f)
-				runSpeed += 0.015f;
-			else
-				runSpeed = 0.2f;
-			break;
-		case 3:
-			if (runSpeed < 0.25f)
-				runSpeed += 0.02f;
-			else
-				runSpeed = 0.25f;
-			break;
-		default:
-			Debug.Log ("error");
-			break;
+			for(int i = 0; i < leftStepCount; i++) 
+			{
+				if (i == leftStepCount-1)
+					leftStepCount--;
+				else
+					leftSteps[i] = leftSteps[i+1]; 
+			}
 		}
+	}
+
+	void RightLegAdd()
+	{
+		if ((lastRightKneeY <= runThreshold) && (rightKneeY > runThreshold))
+		{
+			rightSteps[rightStepCount] = getTimestamp();
+			rightStepCount++;
+		}
+	}
+
+	void RightLegRemove()
+	{
+		if (rightSteps[0] < (getTimestamp() - 5.0))
+		{
+			for(int i = 0; i < rightStepCount; i++) 
+			{
+				if (i == rightStepCount-1)
+					rightStepCount--;
+				else
+					rightSteps[i] = rightSteps[i+1];
+			}
+		}
+	}
+
+	void Steps()
+	{
+		steps = leftStepCount + rightStepCount;
 	}
 
 	double getTimestamp() 
@@ -157,17 +120,6 @@ public class Run : MonoBehaviour
 
 		return timestamp;
 	}
-
-//	void RepetitionCount ()
-//	{
-//		double[] stepCount;
-//		// #TODO if step then add timestamp to count, if timestamp expires (~2 sec) subtract from count
-//		// length of count adds speed up to maxspeed
-//		if (bla)
-//		{
-//			steps++;
-//		}
-//	}
 }
 
 

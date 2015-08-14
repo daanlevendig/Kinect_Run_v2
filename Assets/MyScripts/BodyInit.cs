@@ -96,6 +96,7 @@ public class BodyInit : MonoBehaviour
 		}
 		else 
 		{
+			StartCoroutine(Delay ());
 			inRange = "\n";
 			distanceBool = true;
 		}
@@ -108,7 +109,8 @@ public class BodyInit : MonoBehaviour
 		}
 		else
 		{
-			straightKnees = "";
+			StartCoroutine(Delay ());
+			straightKnees = "\n";
 			angleBool = true;
 		}
 
@@ -120,6 +122,7 @@ public class BodyInit : MonoBehaviour
 		}
 		else
 		{
+			StartCoroutine(Delay ());
 			groundedFeet = "\n";
 			groundedBool = true;
 		}
@@ -160,10 +163,20 @@ public class BodyInit : MonoBehaviour
 		{
 			yBottom = bottomSpine.y;
 			stored.yBottom = yBottom;
+//			if (leftFoot.y < rightFoot.y)
+//				lowestFoot = leftFoot.y;
+//			else
+//				lowestFoot = rightFoot.y;
+//			stored.lowestFoot = lowestFoot;
 			Application.LoadLevel(2);
 		}
 		else
 			coroutineStarted = false;
+	}
+
+	IEnumerator Delay()
+	{
+		yield return new WaitForSeconds(1);
 	}
 }
 
