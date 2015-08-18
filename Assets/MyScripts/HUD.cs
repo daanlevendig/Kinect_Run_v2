@@ -8,6 +8,7 @@ public class HUD : MonoBehaviour
 
 	public Movement movement;
 
+
 	public Text timer, score, endTime, endScore;
 
 	public string clock, highScore, endPoints;
@@ -24,6 +25,7 @@ public class HUD : MonoBehaviour
 		rend = GetComponent<MeshRenderer>();
 		headRend = GetComponentInChildren<MeshRenderer>();
 		movement = GetComponent<Movement>();
+
 
 		timer = GameObject.Find ("Timer").GetComponent<Text>();
 		score = GameObject.Find ("Score").GetComponent<Text>();
@@ -56,6 +58,8 @@ public class HUD : MonoBehaviour
 		if (realSeconds > 1.00) 
 		{
 			seconds++;
+			// store seconds in int for highscore purposes
+			secondsHS++;
 			realSeconds = 0;
 		}
 		
@@ -71,13 +75,6 @@ public class HUD : MonoBehaviour
 		{
 			clock = (string.Format("{0}", minutes)) + ":" + (string.Format ("{0:00}", seconds));
 			timer.text = clock;
-		}
-		
-		// store seconds in int for highscore purposes
-		if (realSeconds > 1.00) 
-		{
-			secondsHS++;
-			realSeconds = 0;
 		}
 		
 		// store highscore in a string

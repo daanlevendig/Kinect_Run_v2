@@ -66,12 +66,14 @@ public class Movement : MonoBehaviour
 		screen = GameObject.FindGameObjectWithTag("ScreenOverlay");
 		overlay = screen.GetComponent<ScreenOverlay>();
 		finish = GameObject.FindGameObjectWithTag("Finish");
-		
+
+		// Tweak to set sensativity
 		rightBoundry = 0.4f;
 		leftBoundry = -0.4f;
 		moveSideways = 7.5f;
 		
 		moveForward = 0.0f;
+		// tweak to adjust speed
 		moveSpeed = 0.125f;
 		combinedSpeed = 0.0f;
 		

@@ -58,7 +58,7 @@ public class Jump : MonoBehaviour
 		else if (transform.position.z <= 1.0f)
 		{
 			yBottom = movement.stored.yBottom;
-			squatThreshold = (yBottom - movement.lowestFoot) * 0.85f;
+			squatThreshold = (yBottom - movement.stored.lowestFoot) * 0.85f;
 			jumpThreshold = yBottom * 1.025f;
 		}
 
