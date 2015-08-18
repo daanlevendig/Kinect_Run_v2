@@ -65,14 +65,13 @@ public class BodyInit : MonoBehaviour
 		long userID = manager ? manager.GetUserIdByIndex (0) : 0;
 		if (userID == 0) 
 		{
-			StartCoroutine(Delay ());
 			noUser = "No User Detected\n";
 			return;
 		}
 		else
 			noUser = "\n";
 
-		// 
+		// Joints
 		bottomSpine = manager.GetJointPosition (userID, 0);
 		bottomHead = manager.GetJointPosition (userID, 2);
 		leftHip = manager.GetJointPosition (userID, 12);
@@ -86,50 +85,43 @@ public class BodyInit : MonoBehaviour
 		LowestFoot();
 
 		// check distance from the sensor
-		if (bottomSpine.z > 2.0f && !delayBusy)
+		if (bottomSpine.z > 2.0f)
 		{
-			StartCoroutine(Delay ());
 			inRange = "Too far!\n";
 			distanceBool = false;
 		}
-		else if (bottomSpine.z < 1.25f && !delayBusy)
+		else if (bottomSpine.z < 1.25f)
 		{
-			StartCoroutine(Delay ());
 			inRange = "Too close!\n";
 			distanceBool = false;
 		}
-		else if (!delayBusy)
+		else
 		{
 			distanceBool = true;
-			StartCoroutine(Delay ());
 			inRange = "\n";
 		}
 
 		// check for straight legs
-		if (((leftLegAngle < 165.0f) || (rightLegAngle < 165.0f) || (leftUp < 155.0f) || (rightUp < 155.0f)) && !delayBusy)
+		if ((leftLegAngle < 165.0f) || (rightLegAngle < 165.0f) || (leftUp < 155.0f) || (rightUp < 155.0f))
 		{
-			StartCoroutine(Delay ());
 			straightKnees = "Stand up straight!\n";
 			angleBool = false;
 		}
-		else if (!delayBusy)
+		else
 		{
 			angleBool = true;
-			StartCoroutine(Delay ());
 			straightKnees = "\n";
 		}
 
 		// check for feet on ground
-		if ((Mathf.Abs (leftFoot.y - rightFoot.y) > 0.05f) && !delayBusy)
+		if (Mathf.Abs (leftFoot.y - rightFoot.y) > 0.05f)
 		{
-			StartCoroutine(Delay ());
 			groundedFeet = "Keep both feet grounded!\n";
 			groundedBool = false;
 		}
-		else if (!delayBusy)
+		else
 		{
 			groundedBool = true;
-			StartCoroutine(Delay ());
 			groundedFeet = "\n";
 		}
 
@@ -182,13 +174,6 @@ public class BodyInit : MonoBehaviour
 		}
 		else
 			coroutineStarted = false;
-	}
-
-	IEnumerator Delay()
-	{
-		delayBusy = true;
-		yield return new WaitForSeconds(1);
-		delayBusy = false;
 	}
 }
 

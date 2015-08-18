@@ -79,9 +79,5 @@ public class HUD : MonoBehaviour
 			secondsHS++;
 			realSeconds = 0;
 		}
-		
-		// store highscore in a string
-		if (finished)
-			highScore = clock;
 	}
 }
