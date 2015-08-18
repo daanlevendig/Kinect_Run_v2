@@ -11,9 +11,7 @@ public class Run : MonoBehaviour
 	public Jump jump;
 	public Movement movement;
 	public HUD hud;
-	public GameObject values;
-	public StoredValues stored;
-	
+
 	public Slider slider;
 	public GameObject speedSlider;
 
@@ -25,17 +23,12 @@ public class Run : MonoBehaviour
 	public float runSpeed, lastRunSpeed;
 	public float runThreshold;
 	public float vel;
-	public float yBottom, lowestFoot;
 
 	private double timestampLastMoved;
 
 	// Use this for initialization
 	void Start () 
 	{
-		movement = GetComponent<Movement>();
-		values = GameObject.FindGameObjectWithTag("Values");
-		stored = values.GetComponent<StoredValues>();
-
 		runSpeed = 0.0f;
 		lastRunSpeed = 0.0f;
 		vel = 0.1f;
@@ -48,13 +41,12 @@ public class Run : MonoBehaviour
 		movement = GetComponent<Movement>();
 		hud = GetComponent<HUD>();
 
-		yBottom = stored.yBottom;
+		runThreshold = ((movement.stored.yBottom - movement.stored.lowestFoot) * 0.65f);
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		runThreshold = (yBottom * 0.7f);
 		bottomSpineY = movement.bottomSpine.y;
 
 		speedSlider = GameObject.FindGameObjectWithTag("RunSpeed");
@@ -79,7 +71,6 @@ public class Run : MonoBehaviour
 
 	void AdjustSlider()
 	{
-		// tweak to change speed
 		slider.value = Mathf.SmoothDamp((lastRunSpeed / 0.333f),(runSpeed / 0.333f), ref vel, 0.5f);
 	}
 
@@ -122,7 +113,7 @@ public class Run : MonoBehaviour
 
 	void RightLegRemove()
 	{
-		if (rightSteps[0] < (getTimestamp() - 3.0))
+		if (rightSteps[0] < (getTimestamp() - 5.0))
 		{
 			for(int i = 0; i < rightStepCount; i++) 
 			{
