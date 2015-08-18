@@ -4,9 +4,8 @@ using System.Collections;
 
 /// <summary>
 /// Body init.
-/// The experience of the gameplay depends on good initialisation of the body
+/// The experience of the gameplay depends on good initialization of the body
 /// </summary>
-
 
 public class BodyInit : MonoBehaviour
 {
@@ -29,9 +28,9 @@ public class BodyInit : MonoBehaviour
 	public Vector3 leftUpperLeg, leftLowerLeg;
 	public Vector3 rightUpperLeg, rightLowerLeg;
 
-	public float leftLegAngle, rightLegAngle, leftUp, rightUp, lowestFoot, yBottom, yKneeBase;
+	public float leftLegAngle, rightLegAngle, leftUp, rightUp, lowestFoot, yBottom;
 
-	public bool distanceBool, angleBool, groundedBool, coroutineStarted;
+	public bool distanceBool, angleBool, groundedBool, coroutineStarted, delayBusy;
 
 	// Use this for initialization
 	void Start () 
@@ -52,6 +51,7 @@ public class BodyInit : MonoBehaviour
 		angleBool = false;
 		groundedBool = false;
 		coroutineStarted = false;
+		delayBusy = false;
 
 		yBottom = 0f;
 	}
@@ -65,6 +65,7 @@ public class BodyInit : MonoBehaviour
 		long userID = manager ? manager.GetUserIdByIndex (0) : 0;
 		if (userID == 0) 
 		{
+			StartCoroutine(Delay ());
 			noUser = "No User Detected\n";
 			return;
 		}
@@ -82,19 +83,22 @@ public class BodyInit : MonoBehaviour
 		rightFoot = manager.GetJointPosition (userID, 19);
 
 		LegAngles();
+		LowestFoot();
 
 		// check distance from the sensor
-		if (bottomSpine.z > 2.0f)
+		if (bottomSpine.z > 2.0f && !delayBusy)
 		{
+			StartCoroutine(Delay ());
 			inRange = "Too far!\n";
 			distanceBool = false;
 		}
-		else if (bottomSpine.z < 1.25f)
+		else if (bottomSpine.z < 1.25f && !delayBusy)
 		{
+			StartCoroutine(Delay ());
 			inRange = "Too close!\n";
 			distanceBool = false;
 		}
-		else 
+		else if (!delayBusy)
 		{
 			distanceBool = true;
 			StartCoroutine(Delay ());
@@ -102,12 +106,13 @@ public class BodyInit : MonoBehaviour
 		}
 
 		// check for straight legs
-		if ((leftLegAngle < 165.0f) || (rightLegAngle < 165.0f) || (leftUp < 155.0f) || (rightUp < 155.0f))
+		if (((leftLegAngle < 165.0f) || (rightLegAngle < 165.0f) || (leftUp < 155.0f) || (rightUp < 155.0f)) && !delayBusy)
 		{
+			StartCoroutine(Delay ());
 			straightKnees = "Stand up straight!\n";
 			angleBool = false;
 		}
-		else
+		else if (!delayBusy)
 		{
 			angleBool = true;
 			StartCoroutine(Delay ());
@@ -115,12 +120,13 @@ public class BodyInit : MonoBehaviour
 		}
 
 		// check for feet on ground
-		if (Mathf.Abs (leftFoot.y - rightFoot.y) > 0.05f)
+		if ((Mathf.Abs (leftFoot.y - rightFoot.y) > 0.05f) && !delayBusy)
 		{
+			StartCoroutine(Delay ());
 			groundedFeet = "Keep both feet grounded!\n";
 			groundedBool = false;
 		}
-		else
+		else if (!delayBusy)
 		{
 			groundedBool = true;
 			StartCoroutine(Delay ());
@@ -148,6 +154,14 @@ public class BodyInit : MonoBehaviour
 		rightUp = Vector3.Angle (Vector3.up, -rightLowerLeg);
 	}
 
+	void LowestFoot()
+	{
+		if (leftFoot.y < rightFoot.y)
+			lowestFoot = leftFoot.y;
+		else 
+			lowestFoot = rightFoot.y;
+	}
+
 	IEnumerator InitCount()
 	{
 		countDown.text = "3";
@@ -163,6 +177,7 @@ public class BodyInit : MonoBehaviour
 		{
 			yBottom = bottomSpine.y;
 			stored.yBottom = yBottom;
+			stored.lowestFoot = lowestFoot;
 			Application.LoadLevel(2);
 		}
 		else
@@ -171,7 +186,9 @@ public class BodyInit : MonoBehaviour
 
 	IEnumerator Delay()
 	{
+		delayBusy = true;
 		yield return new WaitForSeconds(1);
+		delayBusy = false;
 	}
 }
 

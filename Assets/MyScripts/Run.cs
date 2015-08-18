@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System;
 using System.Collections;
 
-public class Run : MonoBehaviour 
+public class Run : MonoBehaviour
 {
 	public double[] leftSteps;
 	public double[] rightSteps;
@@ -33,7 +33,7 @@ public class Run : MonoBehaviour
 		lastRunSpeed = 0.0f;
 		vel = 0.1f;
 
-		maxSteps = 25;
+		maxSteps = 30;
 		leftSteps = new double[maxSteps];
 		rightSteps = new double[maxSteps];
 
@@ -41,7 +41,7 @@ public class Run : MonoBehaviour
 		movement = GetComponent<Movement>();
 		hud = GetComponent<HUD>();
 
-		runThreshold = ((movement.stored.yBottom - movement.stored.lowestFoot) * 0.6f);
+		runThreshold = ((movement.stored.yBottom - movement.stored.lowestFoot) * 0.65f);
 	}
 	
 	// Update is called once per frame
@@ -71,7 +71,7 @@ public class Run : MonoBehaviour
 
 	void AdjustSlider()
 	{
-		slider.value = Mathf.SmoothDamp((lastRunSpeed / 0.333f),(runSpeed / 0.333f), ref vel, 0.1f);
+		slider.value = Mathf.SmoothDamp((lastRunSpeed / 0.333f),(runSpeed / 0.333f), ref vel, 0.5f);
 	}
 
 	void Runspeed()
