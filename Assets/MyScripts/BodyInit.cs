@@ -59,6 +59,7 @@ public class BodyInit : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+
 		initText.text = noUser + straightKnees + inRange + groundedFeet;
 
 		manager = KinectManager.Instance;
