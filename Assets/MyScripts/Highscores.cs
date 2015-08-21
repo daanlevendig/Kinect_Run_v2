@@ -4,11 +4,15 @@ using System.Collections;
 
 public class Highscores : MonoBehaviour 
 {
-	public GameObject finish, topTen, scoreObj;
+	public GameObject finish, topTen, scoreObj, hsOverlay, screen;
+
+	public HUD hud;
+
+	public Button hsButton;
 
 	public Renderer scoreRend;
 
-	public Text HStext;
+	public Text hsText;
 
 	public Finish fScript;
 
@@ -16,85 +20,92 @@ public class Highscores : MonoBehaviour
 
 	public int tempScore;
 
-	public bool levelLoadDone;
+	public bool hsDone;
 
 	// Use this for initialization
 	void Start () 
 	{
-//		DontDestroyOnLoad(gameObject);
-
+		hud = GameObject.FindGameObjectWithTag("Player").GetComponent<HUD>();
 		topTen = GameObject.FindGameObjectWithTag("HighScore");
-		HStext = topTen.GetComponent<Text>();
+		hsText = topTen.GetComponent<Text>();
 		finish = GameObject.FindGameObjectWithTag("Finish");
 		fScript = finish.GetComponent<Finish>();
 		scoreObj = GameObject.FindGameObjectWithTag("TopTen");
-		scoreRend = scoreObj.GetComponent<Renderer>();
-		
-//		scoreObj.SetActive(false);
-
-		levelLoadDone = false;
+		hsOverlay = GameObject.Find("HSimage");
+		screen = GameObject.FindGameObjectWithTag("ScreenOverlay");
+		hsButton = GameObject.Find("HSButton").GetComponent<Button>();
 
 		tempScore = 0;
 
+		hsDone = false;
+
 		highScore = new int[10];
-		highScore[0] = 0;
-		highScore[1] = 0;
-		highScore[2] = 0;
-		highScore[3] = 0;
-		highScore[4] = 0;
-		highScore[5] = 0;
-		highScore[6] = 0;
-		highScore[7] = 0;
-		highScore[8] = 0;
-		highScore[9] = 0;
+		highScore[0] = 50000;
+		highScore[1] = 25000;
+		highScore[2] = 10000;
+		highScore[3] = 5000;
+		highScore[4] = 2500;
+		highScore[5] = 1250;
+		highScore[6] = 1000;
+		highScore[7] = 500;
+		highScore[8] = 125;
+		highScore[9] = 50;
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
-//		Debug.Log (string.Format ("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7, {8}, {9}", 
-//		                          highScore[0], highScore[1], highScore[2], highScore[3], highScore[4], highScore[5], highScore[6], highScore[7], highScore[8], highScore[9]));
-		DontDestroyOnLoad(gameObject);
-//
-//		if (Application.loadedLevel != 8)
-//			scoreRend.enabled = false;
+		Debug.Log (string.Format ("{0}\n\n{1}\n\n{2}\n\n{3}\n\n{4}\n\n{5}\n\n{6}\n\n{7}\n\n{8}\n\n{9}", 
+		                          highScore[0], highScore[1], highScore[2], highScore[3], highScore[4], highScore[5], highScore[6], highScore[7], highScore[8], highScore[9]));
 
-		if (levelLoadDone)
+		if (!fScript.calcDone)
+			hsButton.interactable = false;
+		else
 		{
-			scoreRend.enabled = true;
-			Debug.Log ("hoi");
-			HStext.text = string.Format ("{0}\n\n{1}\n\n{2}\n\n{3}\n\n{4}\n\n{5}\n\n{6}\n\n{7}\n\n{8}\n\n{9}", 
+			hsText.text = string.Format ("{0}\n\n{1}\n\n{2}\n\n{3}\n\n{4}\n\n{5}\n\n{6}\n\n{7}\n\n{8}\n\n{9}", 
 				highScore[0], highScore[1], highScore[2], highScore[3], highScore[4], highScore[5], highScore[6], highScore[7], highScore[8], highScore[9]);
 		}
-		else
-			scoreRend.enabled = false;
 
-		if (fScript.calcDone)
+//		Debug.Log (fScript.calcDone);
+
+		if (fScript.calcDone && !hsDone)
 		{
-			Debug.Log ("doei");
 			tempScore = (int)fScript.points;
 			AddScoreToList();
+			hsButton.interactable = true;
 		}
+
+		if (!hud.finished)
+			hsOverlay.SetActive(false);
+
+		DontDestroyOnLoad(gameObject);
 	}
 
 	void AddScoreToList()
 	{
 		for (int i = 9; i > 0; i--)
 		{
-			if (tempScore >= highScore[i])
-				highScore[i] = highScore[i-1];
+			if (tempScore <= highScore[i])
+			{
+				if (i <= 8)
+				{
+					highScore[i+1] = tempScore;
+					hsDone = true;
+					return;
+				}
+				else
+					break;
+			}
 			else
 			{
-				highScore[i] = tempScore;
-				StartCoroutine (Wait());
+				highScore[i] = highScore[i-1];
 			}
 		}
 	}
 
-	IEnumerator Wait()
+	public void ShowHS()
 	{
-		yield return new WaitForSeconds(2);
-		levelLoadDone = true;
-		Application.LoadLevel(8);
+		screen.SetActive(false);
+		hsOverlay.SetActive(true);
 	}
 }

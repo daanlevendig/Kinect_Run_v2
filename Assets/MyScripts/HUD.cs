@@ -55,6 +55,7 @@ public class HUD : MonoBehaviour
 		// add a second every time a 'real' second ends
 		if (realSeconds > 1.00) 
 		{
+			secondsHS++;
 			seconds++;
 			realSeconds = 0;
 		}
@@ -71,13 +72,6 @@ public class HUD : MonoBehaviour
 		{
 			clock = (string.Format("{0}", minutes)) + ":" + (string.Format ("{0:00}", seconds));
 			timer.text = clock;
-		}
-		
-		// store seconds in int for highscore purposes
-		if (realSeconds > 1.00) 
-		{
-			secondsHS++;
-			realSeconds = 0;
 		}
 	}
 }

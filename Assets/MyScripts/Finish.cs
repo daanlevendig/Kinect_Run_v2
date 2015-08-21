@@ -36,6 +36,9 @@ public class Finish : MonoBehaviour
 			StartCoroutine(Screen());
 
 		Finished();
+
+		if (hud.finished && secondsHS == 0)
+			calcDone = true;
 	}
 
 	void Finished()
@@ -75,10 +78,9 @@ public class Finish : MonoBehaviour
 				{
 					seconds = 0;
 					minutes = 0;
-					calcDone = true;
 				}
 			}
-//			secondsHS--;
+			secondsHS--;
 			StartCoroutine(ScoreScreen());
 			break;
 		}

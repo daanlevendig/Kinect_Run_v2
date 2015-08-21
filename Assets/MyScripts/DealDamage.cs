@@ -20,7 +20,8 @@ public class DealDamage : MonoBehaviour
 		squat = player.GetComponent<Squat>();
 		jump = player.GetComponent<Jump>();
 		hud = player.GetComponent<HUD>();
-		bounds = new Bounds(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z)); 
+		bounds = new Bounds(new Vector3(transform.position.x, transform.position.y, transform.position.z), 
+		                    new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z)); 
 	}
 	 	
 	// Update is called once per frame

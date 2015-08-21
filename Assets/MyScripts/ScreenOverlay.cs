@@ -3,11 +3,9 @@ using System.Collections;
 
 public class ScreenOverlay : MonoBehaviour 
 {
-	public GameObject waitingForPlayer;
+	public GameObject waitingForPlayer, pauseScreen;
 	
 	public Pause pause;
-	
-	public GameObject pauseScreen;
 
 	// Use this for initialization
 	void Start () 
