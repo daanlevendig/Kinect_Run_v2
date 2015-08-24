@@ -55,8 +55,8 @@ public class Highscores : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		Debug.Log (string.Format ("{0}\n\n{1}\n\n{2}\n\n{3}\n\n{4}\n\n{5}\n\n{6}\n\n{7}\n\n{8}\n\n{9}", 
-		                          highScore[0], highScore[1], highScore[2], highScore[3], highScore[4], highScore[5], highScore[6], highScore[7], highScore[8], highScore[9]));
+//		Debug.Log (string.Format ("{0}\n\n{1}\n\n{2}\n\n{3}\n\n{4}\n\n{5}\n\n{6}\n\n{7}\n\n{8}\n\n{9}", 
+//		                          highScore[0], highScore[1], highScore[2], highScore[3], highScore[4], highScore[5], highScore[6], highScore[7], highScore[8], highScore[9]));
 
 		if (!fScript.calcDone)
 			hsButton.interactable = false;
